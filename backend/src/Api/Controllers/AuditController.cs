@@ -1,6 +1,6 @@
 using Api.DTOs;
 using Domain.Entities;
-using Infrastructure.Data;
+using Infrastructure.Data.Contexts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,9 +13,9 @@ namespace Api.Controllers;
 [Authorize(Roles = "Admin")]
 public class AuditController : ControllerBase
 {
-    private readonly ApplicationDbContext _context;
+    private readonly AuthDbContext _context;
 
-    public AuditController(ApplicationDbContext context)
+    public AuditController(AuthDbContext context)
     {
         _context = context;
     }

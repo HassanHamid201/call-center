@@ -1011,3 +1011,133 @@ Each specialty group or doctor has an assigned coordinator (منسقة) who:
 | 1.0 | 2026-04-23 | All Agents | Approved for prototype |
 | **1.1** | **2026-04-23** | **Data Integration** | **Added real operational data from Excel: 7 branches, 284 doctors, 30 specialties, 152 FAQ, insurance rules, fee structure, coordinator model** |
 
+
+
+---
+
+## 10. Multi-Database Architecture (v1.2)
+
+### 10.1 Design Principle
+Each bounded context uses its own SQLite database file to ensure isolation, independent versioning, and clear domain boundaries.
+
+| Database File | DbContext | Domain | Entities |
+|---|---|---|---|
+| `tadawi_auth.db` | `AuthDbContext` | Authentication & Audit | User, AuditLog |
+| `tadawi_medical.db` | `MedicalDbContext` | Medical Operations | Branch, Doctor, Specialty, Sector, FaqItem |
+| `tadawi_patients.db` | `PatientDbContext` | Patient Care | Patient, Appointment, Visit, MedicalHistory |
+| `tadawi_reference.db` | `ReferenceDbContext` | Reference Data | Nationality, InsuranceOption, Classification, AvailabilityStatus, ClinicMechanism, Coordinator, WorkingHour, WorkingDay, AgeGroup, ServiceCatalog |
+
+### 10.2 Cross-Context References
+SQLite cannot enforce foreign keys across database files. All cross-context relationships are stored as logical foreign keys (plain `Guid` fields) validated at the application layer.
+
+---
+
+## 11. Patient Domain (v1.2)
+
+### 11.1 Patient Entity
+| Field | Type | Description |
+|---|---|---|
+| Id | Guid | Primary key |
+| FullName | string | Patient full name |
+| Phone | string? | Contact phone |
+| IdentityNumber | string? | رقم الهوية |
+| FileNumber | string? | رقم الملف |
+| DateOfBirth | DateTime? | Birth date |
+| Gender | string? | Male / Female |
+| Nationality | string? | Nationality |
+| Address | string? | Home address |
+| Email | string? | Email address |
+
+### 11.2 Appointment Entity
+| Field | Type | Description |
+|---|---|---|
+| Id | Guid | Primary key |
+| PatientId | Guid | Logical FK to Patient |
+| DoctorId | Guid? | Logical FK to Doctor |
+| BranchId | Guid? | Logical FK to Branch |
+| AppointmentDate | DateTime | Scheduled date/time |
+| Status | string | Scheduled / Completed / Cancelled / NoShow |
+| Notes | string? | Additional notes |
+
+### 11.3 Visit Entity
+| Field | Type | Description |
+|---|---|---|
+| Id | Guid | Primary key |
+| PatientId | Guid | Logical FK to Patient |
+| DoctorId | Guid? | Logical FK to Doctor |
+| BranchId | Guid? | Logical FK to Branch |
+| VisitDate | DateTime | Visit date/time |
+| VisitType | string | FirstVisit / FollowUp / Emergency |
+| Diagnosis | string? | Diagnosis text |
+| Treatment | string? | Treatment text |
+| Notes | string? | Additional notes |
+
+### 11.4 MedicalHistory Entity
+| Field | Type | Description |
+|---|---|---|
+| Id | Guid | Primary key |
+| PatientId | Guid | Logical FK to Patient |
+| Condition | string | Condition name |
+| DiagnosisDate | DateTime? | When diagnosed |
+| Status | string | Active / Resolved / Chronic |
+| Notes | string? | Additional notes |
+
+### 11.5 Patient Lookup Page
+- **Route**: `/patients`
+- **Search by**: Phone, File Number (رقم الملف), Identity Number (رقم الهوية)
+- **Detail view tabs**: Profile, Appointments, Visits, Medical History
+
+---
+
+## 12. Reference Data Domain (v1.2)
+
+### 12.1 Lookup Tables
+All lookups are stored as database tables with admin CRUD management:
+
+| Table | Source | Count (from Excel) |
+|---|---|---|
+| Nationalities | Doctor nationality column | 5 |
+| InsuranceOptions | Doctor insurance column | 4 |
+| Classifications | Doctor classification column | 4 |
+| AvailabilityStatuses | Doctor availability column | 8 |
+| ClinicMechanisms | Doctor clinic mechanism column | 7 |
+| Coordinators | Doctor coordinator column | 14 |
+| WorkingHours | Doctor working hours column | 37 |
+| WorkingDays | Doctor working days column | 30 |
+| AgeGroups | Doctor age group column | 25 |
+| ServiceCatalogs | Doctor services column | 31 |
+
+### 12.2 Admin Management
+- **Route**: `/admin/references`
+- Unified page with type selector dropdown
+- Full CRUD for each lookup type
+
+---
+
+## 13. Internationalization (v1.2)
+
+### 13.1 Language Support
+- **Languages**: Arabic (AR) + English (EN)
+- **Default**: Arabic with RTL
+- **Library**: react-i18next
+- **Direction**: Linked (AR = RTL, EN = LTR)
+
+### 13.2 Backend Value Mapping
+Backend stores Arabic enum values. When UI is in English mode, values are mapped:
+- `أستشاري` → `Consultant`
+- `أخصائي` → `Specialist`
+- `متواجد` → `Available`
+- `يقبل تأمين` → `Accepts Insurance`
+- etc.
+
+---
+
+## Document Control (Updated)
+
+| Version | Date | Author | Changes |
+|---------|------|--------|---------|
+| 0.1 | 2026-04-23 | SA Agent | Initial draft |
+| 0.2 | 2026-04-23 | PO Agent | Added personas and metrics |
+| 1.0 | 2026-04-23 | All Agents | Approved for prototype |
+| 1.1 | 2026-04-23 | Data Integration | Added real operational data from Excel |
+| **1.2** | **2026-04-23** | **Architecture** | **Multi-database architecture, Patient domain, Reference data domain, i18n RTL/LTR** |

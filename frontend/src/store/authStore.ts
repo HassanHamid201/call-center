@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 
 export interface User {
   id: string
@@ -15,34 +16,28 @@ interface AuthState {
   isAuthenticated: boolean
   setAuth: (token: string, user: User) => void
   logout: () => void
-  init: () => void
 }
 
-export const useAuthStore = create<AuthState>((set) => ({
-  user: null,
-  token: null,
-  isAuthenticated: false,
-  setAuth: (token, user) => {
-    localStorage.setItem('token', token)
-    localStorage.setItem('user', JSON.stringify(user))
-    set({ token, user, isAuthenticated: true })
-  },
-  logout: () => {
-    localStorage.removeItem('token')
-    localStorage.removeItem('user')
-    set({ token: null, user: null, isAuthenticated: false })
-  },
-  init: () => {
-    const token = localStorage.getItem('token')
-    const userJson = localStorage.getItem('user')
-    if (token && userJson) {
-      try {
-        const user = JSON.parse(userJson)
+export const useAuthStore = create<AuthState>()(
+  persist(
+    (set) => ({
+      user: null,
+      token: null,
+      isAuthenticated: false,
+      setAuth: (token, user) => {
         set({ token, user, isAuthenticated: true })
-      } catch {
-        localStorage.removeItem('token')
-        localStorage.removeItem('user')
-      }
+      },
+      logout: () => {
+        set({ token: null, user: null, isAuthenticated: false })
+      },
+    }),
+    {
+      name: 'tadawi-auth',
+      partialize: (state) => ({
+        token: state.token,
+        user: state.user,
+        isAuthenticated: state.isAuthenticated,
+      }),
     }
-  },
-}))
+  )
+)

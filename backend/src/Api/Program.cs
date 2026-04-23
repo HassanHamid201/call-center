@@ -3,6 +3,8 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Application.Interfaces;
 using Infrastructure.Data;
+using Infrastructure.Data.Contexts;
+using Infrastructure.Data.Seeders;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -65,8 +67,17 @@ builder.Services.AddHealthChecks()
     .AddRedis(builder.Configuration.GetConnectionString("Redis")!, name: "redis", tags: new[] { "cache" });
 
 // Database (SQLite for local dev - zero-config, file-based)
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite("Data Source=tadawi.db"));
+builder.Services.AddDbContext<AuthDbContext>(options =>
+    options.UseSqlite("Data Source=tadawi_auth.db"));
+
+builder.Services.AddDbContext<MedicalDbContext>(options =>
+    options.UseSqlite("Data Source=tadawi_medical.db"));
+
+builder.Services.AddDbContext<PatientDbContext>(options =>
+    options.UseSqlite("Data Source=tadawi_patients.db"));
+
+builder.Services.AddDbContext<ReferenceDbContext>(options =>
+    options.UseSqlite("Data Source=tadawi_reference.db"));
 
 // Redis
 builder.Services.AddSingleton<IConnectionMultiplexer>(sp =>
@@ -107,11 +118,26 @@ builder.Services.AddProblemDetails(options =>
 
 var app = builder.Build();
 
-// Ensure database is created and seeded
+// Ensure databases are created and seeded
 using (var scope = app.Services.CreateScope())
 {
-    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    db.Database.EnsureCreated();
+    var authDb = scope.ServiceProvider.GetRequiredService<AuthDbContext>();
+    authDb.Database.EnsureCreated();
+
+    var medicalDb = scope.ServiceProvider.GetRequiredService<MedicalDbContext>();
+    medicalDb.Database.EnsureCreated();
+
+    var patientDb = scope.ServiceProvider.GetRequiredService<PatientDbContext>();
+    patientDb.Database.EnsureCreated();
+
+    var referenceDb = scope.ServiceProvider.GetRequiredService<ReferenceDbContext>();
+    referenceDb.Database.EnsureCreated();
+
+    var seedDataPath = Path.Combine(builder.Environment.ContentRootPath, "SeedData");
+    if (Directory.Exists(seedDataPath))
+    {
+        await referenceDb.SeedReferenceDataAsync(seedDataPath);
+    }
 }
 
 // Middleware pipeline

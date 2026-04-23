@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import { apiClient, type PagedResult } from '@/api/client'
 import { Link } from 'react-router-dom'
 import { Building2, MapPin, Phone, Search } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 interface Branch {
   id: string
@@ -20,6 +21,7 @@ export default function BranchList() {
   const [page, setPage] = useState(1)
   const [city, setCity] = useState('')
   const pageSize = 10
+  const { t } = useTranslation()
 
   const { data, isLoading } = useQuery({
     queryKey: ['branches', page, city],
@@ -31,20 +33,20 @@ export default function BranchList() {
     },
   })
 
-  if (isLoading) return <div className="p-8 text-center">Loading branches...</div>
+  if (isLoading) return <div className="p-8 text-center">{t('common.loading')}</div>
 
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <h1 className="text-2xl font-bold text-gray-900">Branches</h1>
+        <h1 className="text-2xl font-bold text-gray-900">{t('branches.title')}</h1>
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+          <Search className="absolute start-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
           <input
             type="text"
-            placeholder="Filter by city..."
+            placeholder={t('branches.filterByCity')}
             value={city}
             onChange={(e) => { setCity(e.target.value); setPage(1) }}
-            className="pl-9 pr-4 py-2 border border-gray-300 rounded-md text-sm focus:ring-primary-500 focus:border-primary-500"
+            className="ps-9 pe-4 py-2 border border-gray-300 rounded-md text-sm focus:ring-primary-500 focus:border-primary-500"
           />
         </div>
       </div>
@@ -58,21 +60,21 @@ export default function BranchList() {
           >
             <div className="flex items-start justify-between">
               <div className="flex items-center">
-                <Building2 className="h-5 w-5 text-primary-600 mr-2" />
+                <Building2 className="h-5 w-5 text-primary-600 me-2" />
                 <h3 className="text-lg font-medium text-gray-900">{branch.name}</h3>
               </div>
               <span className={branch.isActive ? 'text-green-600 text-xs' : 'text-gray-400 text-xs'}>
-                {branch.isActive ? 'Active' : 'Inactive'}
+                {branch.isActive ? t('common.active') : t('common.inactive')}
               </span>
             </div>
             <div className="mt-3 space-y-1 text-sm text-gray-500">
               <div className="flex items-center">
-                <MapPin className="h-4 w-4 mr-1" />
+                <MapPin className="h-4 w-4 me-1" />
                 {branch.address}, {branch.city}
               </div>
               {branch.phone && (
                 <div className="flex items-center">
-                  <Phone className="h-4 w-4 mr-1" />
+                  <Phone className="h-4 w-4 me-1" />
                   {branch.phone}
                 </div>
               )}
@@ -85,7 +87,7 @@ export default function BranchList() {
               ))}
             </div>
             <div className="mt-3 text-sm text-gray-500">
-              {branch.doctorCount} doctor{branch.doctorCount !== 1 ? 's' : ''}
+              {t('branches.doctorCount', { count: branch.doctorCount })}
             </div>
           </Link>
         ))}
@@ -98,17 +100,17 @@ export default function BranchList() {
             disabled={page === 1}
             className="px-3 py-1 border rounded text-sm disabled:opacity-50"
           >
-            Prev
+            {t('common.prev')}
           </button>
           <span className="px-3 py-1 text-sm text-gray-600">
-            Page {page} of {data.totalPages}
+            {t('common.pageOf', { page, total: data.totalPages })}
           </span>
           <button
             onClick={() => setPage((p) => Math.min(data.totalPages, p + 1))}
             disabled={page === data.totalPages}
             className="px-3 py-1 border rounded text-sm disabled:opacity-50"
           >
-            Next
+            {t('common.next')}
           </button>
         </div>
       )}

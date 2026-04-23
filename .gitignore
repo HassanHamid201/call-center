@@ -32,3 +32,8 @@ Thumbs.db
 # Ralphy
 .ralphy-sandboxes/
 .ralphy-worktrees/
+
+# SQLite databases
+*.db
+*.db-shm
+*.db-wal

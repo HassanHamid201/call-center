@@ -1229,3 +1229,53 @@ BUFFER ALLOCATION:
 3. **DevOps Agent:** Initialize repositories and CI pipelines immediately
 4. **SEC Agent:** Schedule STRIDE threat modeling session (Week 1, Day 1)
 5. **All Agents:** Confirm resource availability and blockers for Sprint 0
+
+
+---
+
+## Completed Tasks (2026-04-23)
+
+### Infrastructure
+- [x] **Multi-database architecture** — 4 SQLite DBs (auth, medical, patients, reference)
+- [x] **AuthDbContext** — Users + AuditLogs with seed data
+- [x] **MedicalDbContext** — Branches, Doctors, Specialties, Sectors, FAQ with full seed data
+- [x] **PatientDbContext** — Patients, Appointments, Visits, MedicalHistory with sample seed data
+- [x] **ReferenceDbContext** — 10 lookup tables with seed data
+- [x] **Program.cs** — All 4 contexts registered in DI, EnsureCreated on startup
+
+### Backend APIs
+- [x] **PatientsController** — Full CRUD + nested endpoints (/appointments, /visits, /medical-history)
+- [x] **ReferencesController** — Unified CRUD for all 10 lookup types
+- [x] **All existing controllers** — Migrated to correct DbContext
+- [x] **Build** — 0 errors, 0 warnings
+
+### Frontend Pages
+- [x] **Patient Lookup** (`/patients`) — Search by phone/file/identity, results list
+- [x] **Patient Detail** (`/patients/:id`) — Tabs: Profile, Appointments, Visits, Medical History
+- [x] **Reference Management** (`/admin/references`) — Unified admin CRUD for all lookup types
+- [x] **Patient Management** (`/admin/patients`) — Full patient CRUD admin page
+- [x] **i18n** — Arabic/English with RTL/LTR, LanguageSwitcher in header
+- [x] **Audit fix** — Mock API now handles `/audit` with 10 sample entries
+
+### Data & Documentation
+- [x] **Excel extraction** — Unique values extracted for all 10 lookup fields → JSON files
+- [x] **BRD v1.2** — Updated with multi-DB architecture, patient domain, reference domain, i18n
+
+---
+
+## Known Issues
+
+1. **WorkingHours/WorkingDays/AgeGroups** data from Excel is free-text and inconsistent (e.g., "10AM-6PM", "10ِِِِAM-6PM", "من 9ص-5م"). The reference tables store raw values; future cleanup needed.
+2. **Cross-context FKs** are logical only (plain Guids). No referential integrity enforced at DB level.
+3. **Old ApplicationDbContext.cs** still exists but is unused. Can be safely deleted when confirmed stable.
+4. **Audit logs** only seeded in mock API; real backend audit logging not yet wired to controller actions.
+
+---
+
+## Next Recommended Actions
+
+1. **Test full flow** — Patient lookup → detail → appointments/visits/history
+2. **DoctorManagement dropdowns** — Switch free-text inputs to Reference API dropdowns for: Nationality, Classification, Insurance, Availability, Clinic Mechanism
+3. **Production seed** — Replace sample patient data with real patient records if available
+4. **Delete old ApplicationDbContext** — After stability confirmed
+5. **Add audit logging middleware** — Auto-log all controller actions to AuditLogs table

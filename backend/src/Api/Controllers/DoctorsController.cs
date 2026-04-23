@@ -1,6 +1,6 @@
 using Api.DTOs;
 using Domain.Entities;
-using Infrastructure.Data;
+using Infrastructure.Data.Contexts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,10 +13,10 @@ namespace Api.Controllers;
 [Authorize]
 public class DoctorsController : ControllerBase
 {
-    private readonly ApplicationDbContext _context;
+    private readonly MedicalDbContext _context;
     private readonly ILogger<DoctorsController> _logger;
 
-    public DoctorsController(ApplicationDbContext context, ILogger<DoctorsController> logger)
+    public DoctorsController(MedicalDbContext context, ILogger<DoctorsController> logger)
     {
         _context = context;
         _logger = logger;

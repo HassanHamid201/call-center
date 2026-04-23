@@ -1,14 +1,9 @@
-import { useEffect } from 'react'
 import { Header } from './Header'
 import { Sidebar } from './Sidebar'
-import { useAuthStore } from '@/store/authStore'
+import { useDirection } from '@/i18n/useDirection'
 
 export function AppShell({ children }: { children: React.ReactNode }) {
-  const init = useAuthStore((s) => s.init)
-
-  useEffect(() => {
-    init()
-  }, [init])
+  useDirection()
 
   return (
     <div className="min-h-screen bg-gray-50">

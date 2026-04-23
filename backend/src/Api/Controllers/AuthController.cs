@@ -4,7 +4,8 @@ using System.Text;
 using Api.DTOs;
 using Domain.Entities;
 using Domain.Enums;
-using Infrastructure.Data;
+using Infrastructure.Data.Contexts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -16,11 +17,11 @@ namespace Api.Controllers;
 [Produces("application/json")]
 public class AuthController : ControllerBase
 {
-    private readonly ApplicationDbContext _context;
+    private readonly AuthDbContext _context;
     private readonly IConfiguration _configuration;
     private readonly ILogger<AuthController> _logger;
 
-    public AuthController(ApplicationDbContext context, IConfiguration configuration, ILogger<AuthController> logger)
+    public AuthController(AuthDbContext context, IConfiguration configuration, ILogger<AuthController> logger)
     {
         _context = context;
         _configuration = configuration;
@@ -36,7 +37,6 @@ public class AuthController : ControllerBase
     public async Task<ActionResult<LoginResponse>> Login([FromBody] LoginRequest request)
     {
         var user = await _context.Users
-            .Include(u => u.Branch)
             .FirstOrDefaultAsync(u => u.Email == request.Email && u.IsActive);
 
         if (user == null || !BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
@@ -72,6 +72,7 @@ public class AuthController : ControllerBase
     /// Registers a new user (Admin only)
     /// </summary>
     [HttpPost("register")]
+    [Authorize(Roles = "Admin")]
     [ProducesResponseType(typeof(UserDto), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<UserDto>> Register([FromBody] RegisterRequest request)
@@ -110,6 +111,7 @@ public class AuthController : ControllerBase
     /// Gets the current authenticated user
     /// </summary>
     [HttpGet("me")]
+    [Authorize]
     [ProducesResponseType(typeof(UserDto), StatusCodes.Status200OK)]
     public async Task<ActionResult<UserDto>> Me()
     {

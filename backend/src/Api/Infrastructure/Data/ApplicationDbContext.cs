@@ -1912,7 +1912,7 @@ public class ApplicationDbContext : DbContext
             {
                 Id = Guid.Parse("55555555-5555-5555-5555-555555555555"),
                 Email = "admin@tadawi.med",
-                PasswordHash = "$2a$11$xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                PasswordHash = "$2a$11$dQLyIf9lmZnlu7OAylNt0OCsk/pdiQCNAY6xuMWXf4Rho64VLNC1G",
                 FirstName = "System",
                 LastName = "Admin",
                 Role = Domain.Enums.UserRole.Admin,

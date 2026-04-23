@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useQuery } from '@tanstack/react-query'
 import { apiClient, type PagedResult } from '@/api/client'
 import { ClipboardList, Search, Filter } from 'lucide-react'
@@ -16,6 +17,7 @@ interface AuditLogItem {
 }
 
 export default function AuditLogs() {
+  const { t } = useTranslation()
   const [page, setPage] = useState(1)
   const [entityType, setEntityType] = useState('')
   const [action, setAction] = useState('')
@@ -32,36 +34,36 @@ export default function AuditLogs() {
     },
   })
 
-  if (isLoading) return <div className="p-8 text-center">Loading audit logs...</div>
+  if (isLoading) return <div className="p-8 text-center">{t('admin.auditLogs.loading')}</div>
 
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <h1 className="text-2xl font-bold text-gray-900 flex items-center">
-          <ClipboardList className="h-7 w-7 mr-2 text-primary-600" />
-          Audit Logs
+          <ClipboardList className="h-7 w-7 me-2 text-primary-600" />
+          {t('admin.auditLogs.title')}
         </h1>
       </div>
 
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+          <Search className="absolute start-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
           <input
             type="text"
-            placeholder="Entity type (e.g. Branch, Doctor)..."
+            placeholder={t('admin.auditLogs.entityTypePlaceholder')}
             value={entityType}
             onChange={(e) => { setEntityType(e.target.value); setPage(1) }}
-            className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-md text-sm focus:ring-primary-500 focus:border-primary-500"
+            className="w-full ps-9 pe-4 py-2 border border-gray-300 rounded-md text-sm focus:ring-primary-500 focus:border-primary-500"
           />
         </div>
         <div className="relative flex-1">
-          <Filter className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+          <Filter className="absolute start-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
           <input
             type="text"
-            placeholder="Action (e.g. Create, Update, Delete)..."
+            placeholder={t('admin.auditLogs.actionPlaceholder')}
             value={action}
             onChange={(e) => { setAction(e.target.value); setPage(1) }}
-            className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-md text-sm focus:ring-primary-500 focus:border-primary-500"
+            className="w-full ps-9 pe-4 py-2 border border-gray-300 rounded-md text-sm focus:ring-primary-500 focus:border-primary-500"
           />
         </div>
       </div>
@@ -70,11 +72,11 @@ export default function AuditLogs() {
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Time</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Entity</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">IP Address</th>
+              <th className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase tracking-wider">{t('admin.auditLogs.time')}</th>
+              <th className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase tracking-wider">{t('admin.auditLogs.action')}</th>
+              <th className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase tracking-wider">{t('admin.auditLogs.entity')}</th>
+              <th className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase tracking-wider">{t('admin.auditLogs.user')}</th>
+              <th className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase tracking-wider">{t('admin.auditLogs.ipAddress')}</th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
@@ -96,7 +98,7 @@ export default function AuditLogs() {
                   {log.entityType} <span className="text-gray-400">({log.entityId.slice(0, 8)}...)</span>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {log.userEmail || 'System'}
+                  {log.userEmail || t('common.system')}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {log.ipAddress || '-'}
@@ -114,17 +116,17 @@ export default function AuditLogs() {
             disabled={page === 1}
             className="px-3 py-1 border rounded text-sm disabled:opacity-50"
           >
-            Prev
+            {t('common.prev')}
           </button>
           <span className="px-3 py-1 text-sm text-gray-600">
-            Page {page} of {data.totalPages}
+            {t('common.pageOf', { page, total: data.totalPages })}
           </span>
           <button
             onClick={() => setPage((p) => Math.min(data.totalPages, p + 1))}
             disabled={page === data.totalPages}
             className="px-3 py-1 border rounded text-sm disabled:opacity-50"
           >
-            Next
+            {t('common.next')}
           </button>
         </div>
       )}

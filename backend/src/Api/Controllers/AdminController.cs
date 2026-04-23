@@ -1,7 +1,7 @@
 using Api.DTOs;
 using Domain.Entities;
 using Domain.Enums;
-using Infrastructure.Data;
+using Infrastructure.Data.Contexts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,11 +14,13 @@ namespace Api.Controllers;
 [Authorize(Roles = "Admin")]
 public class AdminController : ControllerBase
 {
-    private readonly ApplicationDbContext _context;
+    private readonly AuthDbContext _authContext;
+    private readonly MedicalDbContext _medicalContext;
 
-    public AdminController(ApplicationDbContext context)
+    public AdminController(AuthDbContext authContext, MedicalDbContext medicalContext)
     {
-        _context = context;
+        _authContext = authContext;
+        _medicalContext = medicalContext;
     }
 
     /// <summary>
@@ -28,13 +30,14 @@ public class AdminController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<object>> GetStats()
     {
-        var users = await _context.Users.CountAsync();
-        var activeUsers = await _context.Users.CountAsync(u => u.IsActive);
-        var branches = await _context.Branches.CountAsync();
-        var doctors = await _context.Doctors.CountAsync();
-        var specialties = await _context.Specialties.CountAsync();
-        var sectors = await _context.Sectors.CountAsync();
-        var auditLogs = await _context.AuditLogs.CountAsync();
+        var users = await _authContext.Users.CountAsync();
+        var activeUsers = await _authContext.Users.CountAsync(u => u.IsActive);
+        var branches = await _medicalContext.Branches.CountAsync();
+        var doctors = await _medicalContext.Doctors.CountAsync();
+        var specialties = await _medicalContext.Specialties.CountAsync();
+        var sectors = await _medicalContext.Sectors.CountAsync();
+        var auditLogs = await _authContext.AuditLogs.CountAsync();
+        var faqItems = await _medicalContext.FaqItems.CountAsync(f => f.IsActive);
 
         return Ok(new
         {
@@ -44,7 +47,8 @@ public class AdminController : ControllerBase
             doctors,
             specialties,
             sectors,
-            auditLogs
+            auditLogs,
+            faqItems
         });
     }
 
@@ -60,7 +64,7 @@ public class AdminController : ControllerBase
         [FromQuery] int page = 1,
         [FromQuery] int pageSize = 20)
     {
-        var query = _context.Users.AsNoTracking().AsQueryable();
+        var query = _authContext.Users.AsNoTracking().AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(email))
             query = query.Where(u => u.Email.Contains(email));
@@ -100,7 +104,7 @@ public class AdminController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<UserDto>> GetUserById(Guid id)
     {
-        var user = await _context.Users
+        var user = await _authContext.Users
             .AsNoTracking()
             .FirstOrDefaultAsync(u => u.Id == id);
 
@@ -126,7 +130,7 @@ public class AdminController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<UserDto>> UpdateUser(Guid id, [FromBody] UpdateUserRequest request)
     {
-        var user = await _context.Users.FindAsync(id);
+        var user = await _authContext.Users.FindAsync(id);
         if (user == null)
             return Problem(title: "Not found", detail: "User not found", statusCode: StatusCodes.Status404NotFound);
 
@@ -141,7 +145,7 @@ public class AdminController : ControllerBase
         else if (request.ClearBranch == true)
             user.BranchId = null;
 
-        await _context.SaveChangesAsync();
+        await _authContext.SaveChangesAsync();
 
         return Ok(new UserDto
         {
@@ -161,12 +165,12 @@ public class AdminController : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> DeleteUser(Guid id)
     {
-        var user = await _context.Users.FindAsync(id);
+        var user = await _authContext.Users.FindAsync(id);
         if (user == null)
             return Problem(title: "Not found", detail: "User not found", statusCode: StatusCodes.Status404NotFound);
 
-        _context.Users.Remove(user);
-        await _context.SaveChangesAsync();
+        _authContext.Users.Remove(user);
+        await _authContext.SaveChangesAsync();
 
         return NoContent();
     }

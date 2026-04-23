@@ -11,7 +11,6 @@ public class User
     public string LastName { get; set; } = string.Empty;
     public UserRole Role { get; set; } = UserRole.CallCenterAgent;
     public Guid? BranchId { get; set; }
-    public Branch? Branch { get; set; }
     public bool IsActive { get; set; } = true;
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime? LastLoginAt { get; set; }

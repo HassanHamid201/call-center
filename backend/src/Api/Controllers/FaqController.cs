@@ -1,6 +1,6 @@
 using Api.DTOs;
 using Domain.Entities;
-using Infrastructure.Data;
+using Infrastructure.Data.Contexts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,9 +13,9 @@ namespace Api.Controllers;
 [Authorize]
 public class FaqController : ControllerBase
 {
-    private readonly ApplicationDbContext _context;
+    private readonly MedicalDbContext _context;
 
-    public FaqController(ApplicationDbContext context)
+    public FaqController(MedicalDbContext context)
     {
         _context = context;
     }
