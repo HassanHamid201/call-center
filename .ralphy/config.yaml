@@ -1,0 +1,29 @@
+# Ralphy Configuration
+# https://github.com/michaelshimeles/ralphy
+
+project:
+  name: "callcenter"
+  language: "C# / TypeScript"
+  framework: ".NET 10 / React 19"
+  description: "Tadawi Medical Group Internal Information Portal - Prototype Phase"
+
+commands:
+  test: ""
+  lint: ""
+  build: ""
+
+rules:
+  - "Backend uses .NET 10 Preview with minimal APIs, EF Core 10, and PostgreSQL 16"
+  - "Frontend uses React 19 + TypeScript + Vite + Tailwind CSS v4"
+  - "All API endpoints must return RFC 7807 Problem Details for errors"
+  - "Use cache-aside pattern with Redis for read-heavy endpoints"
+  - "Frontend uses TanStack Query v5 for server state and Zustand for client state"
+  - "All C# public APIs must have XML documentation comments"
+  - "Follow the monorepo structure: /backend, /frontend, /infra, /docs"
+  - "Use server-side pagination (cursor or offset) for all list endpoints"
+  - "Authentication uses JWT Bearer tokens with role-based claims"
+
+boundaries:
+  never_touch:
+    - "*.lock"
+    - ".ralphy/**"
