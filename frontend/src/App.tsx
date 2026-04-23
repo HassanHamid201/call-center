@@ -10,6 +10,9 @@ const DoctorList = lazy(() => import('./pages/Doctors/DoctorList'))
 const DoctorDetail = lazy(() => import('./pages/Doctors/DoctorDetail'))
 const SearchPage = lazy(() => import('./pages/Search/SearchPage'))
 const LoginPage = lazy(() => import('./pages/Auth/LoginPage'))
+const AdminDashboard = lazy(() => import('./pages/Admin/AdminDashboard'))
+const UserManagement = lazy(() => import('./pages/Admin/UserManagement'))
+const AuditLogs = lazy(() => import('./pages/Admin/AuditLogs'))
 
 function App() {
   return (
@@ -23,6 +26,9 @@ function App() {
           <Route path="/doctors" element={<DoctorList />} />
           <Route path="/doctors/:id" element={<DoctorDetail />} />
           <Route path="/search" element={<SearchPage />} />
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/users" element={<UserManagement />} />
+          <Route path="/admin/audit" element={<AuditLogs />} />
         </Routes>
       </Suspense>
     </AppShell>

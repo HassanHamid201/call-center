@@ -25,7 +25,7 @@ public class CacheService : ICacheService
         var cachedValue = await _database.StringGetAsync(key);
         if (!cachedValue.IsNullOrEmpty)
         {
-            return JsonSerializer.Deserialize<T>(cachedValue!);
+            return JsonSerializer.Deserialize<T>((string)cachedValue!);
         }
 
         var value = await factory();

@@ -134,7 +134,7 @@ public class ApplicationDbContext : DbContext
                 PasswordHash = "$2a$11$xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", // placeholder
                 FirstName = "System",
                 LastName = "Admin",
-                Role = Enums.UserRole.Admin,
+                Role = Domain.Enums.UserRole.Admin,
                 IsActive = true,
                 CreatedAt = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc)
             }
