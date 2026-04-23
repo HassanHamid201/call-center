@@ -3,13 +3,6 @@ import { apiClient } from '@/api/client'
 import { Building2, Stethoscope, Users, Activity } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
-interface Stats {
-  branches: number
-  doctors: number
-  specialties: number
-  sectors: number
-}
-
 function StatCard({ name, value, icon: Icon, href }: { name: string; value: number; icon: any; href: string }) {
   return (
     <Link to={href} className="card hover:shadow-md transition-shadow">
