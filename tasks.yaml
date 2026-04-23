@@ -1,0 +1,126 @@
+tasks:
+  # Group 1: Foundation (all independent)
+  - title: "Setup monorepo structure with README and docs"
+    completed: false
+    parallel_group: 1
+    description: "Create /backend, /frontend, /infra, /docs folders. Write root README.md."
+
+  - title: "Create docker-compose.yml with PostgreSQL Redis and adminer"
+    completed: false
+    parallel_group: 1
+    description: "Docker Compose local dev stack: PostgreSQL 16, Redis 7, Adminer."
+
+  - title: "Scaffold .NET 10 minimal API in backend"
+    completed: false
+    parallel_group: 1
+    description: "Create backend/src/Api/Program.cs with minimal API, health check endpoint targeting <50ms response."
+
+  - title: "Scaffold Vite React 19 TypeScript frontend with Tailwind"
+    completed: false
+    parallel_group: 1
+    description: "Setup Vite + React 19 + TypeScript in /frontend. Install and configure Tailwind CSS v4, ESLint, Prettier."
+
+  - title: "Write ADR and coding standards docs"
+    completed: false
+    parallel_group: 1
+    description: "Write ADR-001 tech stack selection and C#/TypeScript coding standards in /docs/architecture."
+
+  # Group 2: Backend core + DB (depends on Group 1)
+  - title: "Design PostgreSQL schema with EF Core 10 entities"
+    completed: false
+    parallel_group: 2
+    description: "Create EF Core entities for Branches, Doctors, Sectors, Specialties, Users with fluent configuration."
+
+  - title: "Create EF Core DbContext and initial migration with seed data"
+    completed: false
+    parallel_group: 2
+    description: "Setup DbContext, create initial migration, add seed data for test entities."
+
+  - title: "Implement CRUD API controllers for all entities"
+    completed: false
+    parallel_group: 2
+    description: "Build CRUD controllers for Branch, Doctor, Sector, Specialty with DTOs, validation, and Problem Details."
+
+  - title: "Setup OpenAPI 3.1 Swagger UI and health endpoints"
+    completed: false
+    parallel_group: 2
+    description: "Configure OpenAPI 3.1 spec generation, Swagger UI for dev, /health and /ready endpoints."
+
+  # Group 3: Auth Search Cache RBAC (depends on Group 2)
+  - title: "Implement JWT authentication service"
+    completed: false
+    parallel_group: 3
+    description: "Build JWT login/register endpoints with password hashing, token generation, and refresh tokens."
+
+  - title: "Build global search API with filtering and pagination"
+    completed: false
+    parallel_group: 3
+    description: "Search across branches and doctors with filters (name, city, specialty, status) and paginated results."
+
+  - title: "Configure Redis caching rate limiting and session storage"
+    completed: false
+    parallel_group: 3
+    description: "Setup Redis connection multiplexer, generic cache service, cache-aside pattern, 100 req/min rate limiting."
+
+  - title: "Implement RBAC middleware and authorization policies"
+    completed: false
+    parallel_group: 3
+    description: "Create role-based authorization policies, claims-based access control, endpoint authorization attributes."
+
+  # Group 4: Frontend foundation (can start after Group 1, uses mocks)
+  - title: "Build layout shell with responsive navigation"
+    completed: false
+    parallel_group: 4
+    description: "Create AppShell with header, sidebar, mobile drawer, breadcrumb, user menu, branch selector, dark mode toggle."
+
+  - title: "Setup React Router v7 routing and Zustand state management"
+    completed: false
+    parallel_group: 4
+    description: "Configure routes with lazy loading and route guards. Create Zustand stores for auth and branch context."
+
+  - title: "Create API client with TanStack Query and mock service worker"
+    completed: false
+    parallel_group: 4
+    description: "Build Axios client with interceptors, setup TanStack Query v5, toast error handling, mock service worker for offline dev."
+
+  - title: "Generate TypeScript types from OpenAPI and create API hooks"
+    completed: false
+    parallel_group: 4
+    description: "Auto-generate TS types from OpenAPI spec. Create custom useApi hooks for all endpoints."
+
+  # Group 5: Frontend views (depends on Group 4)
+  - title: "Build Branch Management views"
+    completed: false
+    parallel_group: 5
+    description: "Branch list (table/card toggle), detail with doctors, search/filter by city/status/services, create/edit form."
+
+  - title: "Build Doctor Directory views"
+    completed: false
+    parallel_group: 5
+    description: "Doctor list with quick contact, detail profile, search by name/specialty/branch/language, create/edit form."
+
+  - title: "Build Search and Filter page"
+    completed: false
+    parallel_group: 5
+    description: "Global search bar, advanced filters, result cards with pagination."
+
+  - title: "Build Specialty Sector views and User Dashboard"
+    completed: false
+    parallel_group: 5
+    description: "Specialty/Sector listing views and role-based user dashboard widgets."
+
+  # Group 6: Audit QA Polish (depends on Groups 3-5)
+  - title: "Implement audit logging service"
+    completed: false
+    parallel_group: 6
+    description: "Audit interceptor for entity changes, user action logging, IP/UA capture, JSONB diff storage, admin retrieval endpoint."
+
+  - title: "Add E2E tests for core user flows"
+    completed: false
+    parallel_group: 6
+    description: "E2E tests for login flow, branch CRUD, doctor search, and responsive layout."
+
+  - title: "Final integration testing and prototype polish"
+    completed: false
+    parallel_group: 6
+    description: "Integration tests, bug fixes, performance checks, and demo preparation."
