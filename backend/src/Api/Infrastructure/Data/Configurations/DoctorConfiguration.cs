@@ -16,8 +16,22 @@ public class DoctorConfiguration : IEntityTypeConfiguration<Doctor>
         builder.Property(d => d.Mobile).HasMaxLength(50);
         // SQLite stores arrays as JSON automatically
         builder.Property(d => d.Qualifications).HasMaxLength(500);
+        builder.Property(d => d.DisplayName).HasMaxLength(200);
+        builder.Property(d => d.Nationality).HasMaxLength(50);
+        builder.Property(d => d.Classification).HasMaxLength(50);
+        builder.Property(d => d.InsuranceAcceptance).HasMaxLength(100);
+        builder.Property(d => d.AvailabilityStatus).HasMaxLength(50);
+        builder.Property(d => d.CoordinatorName).HasMaxLength(100);
+        builder.Property(d => d.InternalExtension).HasMaxLength(50);
+        builder.Property(d => d.WorkingHours).HasMaxLength(100);
+        builder.Property(d => d.WorkingDays).HasMaxLength(100);
+        builder.Property(d => d.AgeGroup).HasMaxLength(100);
+        builder.Property(d => d.ClinicMechanism).HasMaxLength(200);
         builder.HasIndex(d => d.LastName);
         builder.HasIndex(d => d.IsActive);
+        builder.HasIndex(d => d.Classification);
+        builder.HasIndex(d => d.AvailabilityStatus);
+        builder.HasIndex(d => d.BranchId);
 
         builder.HasOne(d => d.Branch)
             .WithMany(b => b.Doctors)

@@ -1,11 +1,12 @@
 import { apiClient } from '@/api/client'
 import {
-  mockBranches,
-  mockDoctors,
-  mockSpecialties,
-  mockSectors,
-  mockUsers,
-  mockAuditLogs,
+  branches,
+  doctors,
+  specialties,
+  sectors,
+  users,
+  auditLogs,
+  faqItems,
 } from './data'
 
 let mockEnabled = false
@@ -26,7 +27,7 @@ export function enableMockApi() {
     // Auth
     if (url === '/auth/login' && method === 'POST') {
       const body = config.data
-      const user = mockUsers.find((u) => u.email === body.email)
+      const user = users.find((u: any) => u.email === body.email)
       if (user) {
         data = {
           token: 'mock-jwt-token-' + user.role,
@@ -40,26 +41,27 @@ export function enableMockApi() {
     }
     else if (url === '/auth/register' && method === 'POST') {
       const body = config.data
-      const newUser = {
+      const newUser: any = {
         id: 'mock-' + Date.now(),
         email: body.email,
         firstName: body.firstName,
         lastName: body.lastName,
         role: 'CallCenterAgent',
         branchId: null,
+        isActive: true,
       }
-      mockUsers.push(newUser)
+      users.push(newUser)
       status = 201
       data = newUser
     }
     else if (url === '/auth/me') {
-      data = mockUsers[0]
+      data = users[0]
     }
 
     // Branches
     else if (url.startsWith('/branches/') && url.length > '/branches/'.length) {
       const id = url.split('/')[2]
-      const branch = mockBranches.find((b) => b.id === id)
+      const branch = branches.find((b: any) => b.id === id)
       if (branch) {
         data = branch
       } else {
@@ -73,9 +75,9 @@ export function enableMockApi() {
       const page = parseInt(params.get('page') || '1')
       const pageSize = parseInt(params.get('pageSize') || '20')
 
-      let items = [...mockBranches]
-      if (city) items = items.filter((b) => b.city.toLowerCase().includes(city.toLowerCase()))
-      if (isActive !== null) items = items.filter((b) => String(b.isActive) === isActive)
+      let items = [...branches]
+      if (city) items = items.filter((b: any) => b.city.toLowerCase().includes(city.toLowerCase()))
+      if (isActive !== null) items = items.filter((b: any) => String(b.isActive) === isActive)
 
       const totalCount = items.length
       const paged = items.slice((page - 1) * pageSize, page * pageSize)
@@ -85,7 +87,7 @@ export function enableMockApi() {
     // Doctors
     else if (url.startsWith('/doctors/') && url.length > '/doctors/'.length) {
       const id = url.split('/')[2]
-      const doctor = mockDoctors.find((d) => d.id === id)
+      const doctor = doctors.find((d: any) => d.id === id)
       if (doctor) {
         data = doctor
       } else {
@@ -99,9 +101,9 @@ export function enableMockApi() {
       const page = parseInt(params.get('page') || '1')
       const pageSize = parseInt(params.get('pageSize') || '20')
 
-      let items = [...mockDoctors]
-      if (name) items = items.filter((d) => d.fullName.toLowerCase().includes(name.toLowerCase()))
-      if (branchId) items = items.filter((d) => d.branchId === branchId)
+      let items = [...doctors]
+      if (name) items = items.filter((d: any) => (d.displayName || d.fullName || '').toLowerCase().includes(name.toLowerCase()))
+      if (branchId) items = items.filter((d: any) => d.branchId === branchId)
 
       const totalCount = items.length
       const paged = items.slice((page - 1) * pageSize, page * pageSize)
@@ -113,8 +115,8 @@ export function enableMockApi() {
       const params = new URLSearchParams(url.split('?')[1] || '')
       const page = parseInt(params.get('page') || '1')
       const pageSize = parseInt(params.get('pageSize') || '50')
-      const totalCount = mockSpecialties.length
-      const paged = mockSpecialties.slice((page - 1) * pageSize, page * pageSize)
+      const totalCount = specialties.length
+      const paged = specialties.slice((page - 1) * pageSize, page * pageSize)
       data = { items: paged, totalCount, page, pageSize, totalPages: Math.ceil(totalCount / pageSize) || 1 }
     }
 
@@ -123,8 +125,18 @@ export function enableMockApi() {
       const params = new URLSearchParams(url.split('?')[1] || '')
       const page = parseInt(params.get('page') || '1')
       const pageSize = parseInt(params.get('pageSize') || '50')
-      const totalCount = mockSectors.length
-      const paged = mockSectors.slice((page - 1) * pageSize, page * pageSize)
+      const totalCount = sectors.length
+      const paged = sectors.slice((page - 1) * pageSize, page * pageSize)
+      data = { items: paged, totalCount, page, pageSize, totalPages: Math.ceil(totalCount / pageSize) || 1 }
+    }
+
+    // FAQ
+    else if (url.startsWith('/faq')) {
+      const params = new URLSearchParams(url.split('?')[1] || '')
+      const page = parseInt(params.get('page') || '1')
+      const pageSize = parseInt(params.get('pageSize') || '50')
+      const totalCount = faqItems.length
+      const paged = faqItems.slice((page - 1) * pageSize, page * pageSize)
       data = { items: paged, totalCount, page, pageSize, totalPages: Math.ceil(totalCount / pageSize) || 1 }
     }
 
@@ -136,29 +148,29 @@ export function enableMockApi() {
       const page = parseInt(params.get('page') || '1')
       const pageSize = parseInt(params.get('pageSize') || '20')
 
-      let doctors = [...mockDoctors]
-      let branches = [...mockBranches]
+      let docItems = [...doctors]
+      let branchItems = [...branches]
 
       if (query) {
         const q = query.toLowerCase()
-        doctors = doctors.filter((d) => d.fullName.toLowerCase().includes(q) || (d.qualifications && d.qualifications.toLowerCase().includes(q)))
-        branches = branches.filter((b) => b.name.toLowerCase().includes(q) || b.address.toLowerCase().includes(q))
+        docItems = docItems.filter((d: any) => (d.displayName || d.fullName || '').toLowerCase().includes(q) || (d.classification && d.classification.toLowerCase().includes(q)))
+        branchItems = branchItems.filter((b: any) => b.name.toLowerCase().includes(q) || b.address.toLowerCase().includes(q))
       }
       if (city) {
-        doctors = doctors.filter((d) => d.branchName.toLowerCase().includes(city.toLowerCase()))
-        branches = branches.filter((b) => b.city.toLowerCase().includes(city.toLowerCase()))
+        docItems = docItems.filter((d: any) => (d.branchName || '').toLowerCase().includes(city.toLowerCase()))
+        branchItems = branchItems.filter((b: any) => b.city.toLowerCase().includes(city.toLowerCase()))
       }
 
-      const doctorResults = doctors.map((d) => ({
+      const doctorResults = docItems.map((d: any) => ({
         id: d.id,
         type: 'Doctor',
-        title: `Dr. ${d.fullName}`,
-        subtitle: d.specialtyName,
-        description: d.branchName,
+        title: d.displayName || `Dr. ${d.fullName}`,
+        subtitle: d.classification || d.specialtyName,
+        description: d.branchName || '',
         url: `/doctors/${d.id}`,
       }))
 
-      const branchResults = branches.map((b) => ({
+      const branchResults = branchItems.map((b: any) => ({
         id: b.id,
         type: 'Branch',
         title: b.name,
@@ -181,9 +193,9 @@ export function enableMockApi() {
       const page = parseInt(params.get('page') || '1')
       const pageSize = parseInt(params.get('pageSize') || '50')
 
-      let items = [...mockAuditLogs]
-      if (entityType) items = items.filter((a) => a.entityType.toLowerCase().includes(entityType.toLowerCase()))
-      if (action) items = items.filter((a) => a.action.toLowerCase().includes(action.toLowerCase()))
+      let items = [...auditLogs]
+      if (entityType) items = items.filter((a: any) => a.entityType.toLowerCase().includes(entityType.toLowerCase()))
+      if (action) items = items.filter((a: any) => a.action.toLowerCase().includes(action.toLowerCase()))
 
       const totalCount = items.length
       const paged = items.slice((page - 1) * pageSize, page * pageSize)
@@ -193,30 +205,30 @@ export function enableMockApi() {
     // Admin
     else if (url === '/admin/stats') {
       data = {
-        users: mockUsers.length,
-        activeUsers: mockUsers.filter((u) => u.role !== 'Admin').length,
-        branches: mockBranches.length,
-        doctors: mockDoctors.length,
-        specialties: mockSpecialties.length,
-        sectors: mockSectors.length,
-        auditLogs: mockAuditLogs.length,
+        users: users.length,
+        activeUsers: users.filter((u: any) => u.role !== 'Admin').length,
+        branches: branches.length,
+        doctors: doctors.length,
+        specialties: specialties.length,
+        sectors: sectors.length,
+        auditLogs: auditLogs.length,
       }
     }
     else if (url.startsWith('/admin/users/') && url.length > '/admin/users/'.length) {
       const id = url.split('/')[3]
-      const idx = mockUsers.findIndex((u) => u.id === id)
+      const idx = users.findIndex((u: any) => u.id === id)
       if (method === 'PUT' && idx !== -1) {
         const body = config.data
-        if (body.role) mockUsers[idx].role = body.role
-        if (body.isActive !== undefined) mockUsers[idx] = { ...mockUsers[idx], isActive: body.isActive } as any
-        if (body.branchId) mockUsers[idx].branchId = body.branchId
-        data = mockUsers[idx]
+        if (body.role) users[idx].role = body.role
+        if (body.isActive !== undefined) users[idx] = { ...users[idx], isActive: body.isActive } as any
+        if (body.branchId) (users[idx] as any).branchId = body.branchId
+        data = users[idx]
       } else if (method === 'DELETE' && idx !== -1) {
-        mockUsers.splice(idx, 1)
+        users.splice(idx, 1)
         status = 204
         data = null
       } else if (idx !== -1) {
-        data = mockUsers[idx]
+        data = users[idx]
       } else {
         status = 404
       }
@@ -228,9 +240,9 @@ export function enableMockApi() {
       const page = parseInt(params.get('page') || '1')
       const pageSize = parseInt(params.get('pageSize') || '20')
 
-      let items = [...mockUsers]
-      if (email) items = items.filter((u) => u.email.toLowerCase().includes(email.toLowerCase()))
-      if (role) items = items.filter((u) => u.role === role)
+      let items = [...users]
+      if (email) items = items.filter((u: any) => u.email.toLowerCase().includes(email.toLowerCase()))
+      if (role) items = items.filter((u: any) => u.role === role)
 
       const totalCount = items.length
       const paged = items.slice((page - 1) * pageSize, page * pageSize)

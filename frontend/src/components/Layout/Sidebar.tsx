@@ -6,6 +6,7 @@ import {
   Stethoscope,
   Search,
   ShieldCheck,
+  HelpCircle,
 } from 'lucide-react'
 import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
@@ -19,6 +20,7 @@ const navItems = [
   { name: 'Branches', href: '/branches', icon: Building2, roles: ['Admin', 'Manager', 'CallCenterAgent', 'Receptionist', 'Marketing'] },
   { name: 'Doctors', href: '/doctors', icon: Stethoscope, roles: ['Admin', 'Manager', 'CallCenterAgent', 'Receptionist', 'Marketing'] },
   { name: 'Search', href: '/search', icon: Search, roles: ['Admin', 'Manager', 'CallCenterAgent', 'Receptionist', 'Marketing'] },
+  { name: 'FAQ', href: '/faq', icon: HelpCircle, roles: ['Admin', 'Manager', 'CallCenterAgent', 'Receptionist', 'Marketing'] },
   { name: 'Admin', href: '/admin', icon: ShieldCheck, roles: ['Admin'] },
 ]
 

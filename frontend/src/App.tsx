@@ -13,6 +13,7 @@ const LoginPage = lazy(() => import('./pages/Auth/LoginPage'))
 const AdminDashboard = lazy(() => import('./pages/Admin/AdminDashboard'))
 const UserManagement = lazy(() => import('./pages/Admin/UserManagement'))
 const AuditLogs = lazy(() => import('./pages/Admin/AuditLogs'))
+const FaqPage = lazy(() => import('./pages/FAQ/FaqPage'))
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/users" element={<UserManagement />} />
           <Route path="/admin/audit" element={<AuditLogs />} />
+          <Route path="/faq" element={<FaqPage />} />
         </Routes>
       </Suspense>
     </AppShell>

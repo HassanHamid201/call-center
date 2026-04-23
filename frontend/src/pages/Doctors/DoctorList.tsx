@@ -2,13 +2,14 @@ import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { apiClient, type PagedResult } from '@/api/client'
 import { Link } from 'react-router-dom'
-import { Stethoscope, Search, Globe, Phone } from 'lucide-react'
+import { Stethoscope, Search, Globe, Phone, BadgeCheck, Clock, DollarSign, Shield } from 'lucide-react'
 
 interface Doctor {
   id: string
   firstName: string
   lastName: string
   fullName: string
+  displayName?: string
   email?: string
   phone?: string
   mobile?: string
@@ -18,6 +19,20 @@ interface Doctor {
   branchName: string
   specialtyName: string
   sectorName: string
+  // New operational fields
+  nationality?: string
+  classification?: string
+  insuranceAcceptance?: string
+  availabilityStatus?: string
+  coordinatorName?: string
+  internalExtension?: string
+  workingHours?: string
+  workingDays?: string
+  ageGroup?: string
+  consultationFee?: number
+  services?: string
+  clinicMechanism?: string
+  notes?: string
 }
 
 export default function DoctorList() {
@@ -36,6 +51,24 @@ export default function DoctorList() {
   })
 
   if (isLoading) return <div className="p-8 text-center">Loading doctors...</div>
+
+  const getAvailabilityBadge = (status?: string) => {
+    if (!status) return 'bg-gray-100 text-gray-600'
+    if (status.includes('متواجد')) return 'bg-green-100 text-green-700'
+    if (status.includes('إجازة') || status.includes('اجازة')) return 'bg-yellow-100 text-yellow-700'
+    if (status.includes('تنبيه')) return 'bg-orange-100 text-orange-700'
+    if (status.includes('معتذر') || status.includes('لا يوجد')) return 'bg-red-100 text-red-700'
+    return 'bg-gray-100 text-gray-600'
+  }
+
+  const getInsuranceBadge = (insurance?: string) => {
+    if (!insurance) return 'bg-gray-100 text-gray-600'
+    if (insurance.includes('يقبل') && !insurance.includes('لا')) return 'bg-green-100 text-green-700'
+    if (insurance.includes('لايقبل') || insurance.includes('لا يقبل')) return 'bg-red-100 text-red-700'
+    return 'bg-amber-100 text-amber-700'
+  }
+
+  const displayName = (d: Doctor) => d.displayName || d.fullName || `${d.firstName} ${d.lastName}`
 
   return (
     <div className="space-y-6">
@@ -63,13 +96,28 @@ export default function DoctorList() {
                     <div className="flex items-center">
                       <Stethoscope className="h-5 w-5 text-primary-600 mr-3" />
                       <p className="text-sm font-medium text-primary-600 truncate">
-                        {doctor.fullName}
+                        {displayName(doctor)}
                       </p>
+                      {doctor.classification && (
+                        <span className="mr-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
+                          <BadgeCheck className="h-3 w-3 mr-1" />
+                          {doctor.classification}
+                        </span>
+                      )}
                     </div>
-                    <div className="ml-2 flex-shrink-0 flex">
-                      <span className={doctor.isActive ? 'text-green-600 text-xs' : 'text-gray-400 text-xs'}>
-                        {doctor.isActive ? 'Active' : 'Inactive'}
-                      </span>
+                    <div className="ml-2 flex-shrink-0 flex gap-1">
+                      {doctor.availabilityStatus && (
+                        <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${getAvailabilityBadge(doctor.availabilityStatus)}`}>
+                          <Clock className="h-3 w-3 mr-1" />
+                          {doctor.availabilityStatus}
+                        </span>
+                      )}
+                      {doctor.insuranceAcceptance && (
+                        <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${getInsuranceBadge(doctor.insuranceAcceptance)}`}>
+                          <Shield className="h-3 w-3 mr-1" />
+                          {doctor.insuranceAcceptance}
+                        </span>
+                      )}
                     </div>
                   </div>
                   <div className="mt-2 sm:flex sm:justify-between">
@@ -79,14 +127,25 @@ export default function DoctorList() {
                       </p>
                       <p className="flex items-center text-sm text-gray-500">
                         <Globe className="flex-shrink-0 mr-1.5 h-4 w-4 text-gray-400" />
-                        {doctor.languages?.join(', ')}
+                        {doctor.branchName}
                       </p>
+                      {doctor.consultationFee && (
+                        <p className="flex items-center text-sm text-gray-500">
+                          <DollarSign className="flex-shrink-0 mr-1.5 h-4 w-4 text-gray-400" />
+                          {doctor.consultationFee} SAR
+                        </p>
+                      )}
                     </div>
                     <div className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
                       <Phone className="flex-shrink-0 mr-1.5 h-4 w-4 text-gray-400" />
-                      {doctor.branchName}
+                      {doctor.internalExtension || doctor.phone || '—'}
                     </div>
                   </div>
+                  {doctor.coordinatorName && doctor.coordinatorName !== 'لايوجد تنسيق' && doctor.coordinatorName !== 'لا يوجد' && (
+                    <p className="mt-1 text-xs text-gray-400">
+                      المنسقة: {doctor.coordinatorName}
+                    </p>
+                  )}
                 </div>
               </Link>
             </li>

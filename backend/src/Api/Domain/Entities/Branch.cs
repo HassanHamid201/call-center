@@ -4,8 +4,10 @@ public class Branch
 {
     public Guid Id { get; set; }
     public string Name { get; set; } = string.Empty;
+    public string? NameEn { get; set; }
     public string Address { get; set; } = string.Empty;
     public string City { get; set; } = string.Empty;
+    public string? Region { get; set; }
     public string? Phone { get; set; }
     public string? Email { get; set; }
     public double? Latitude { get; set; }

@@ -870,3 +870,144 @@ STAKEHOLDER REQUEST
 2. **Agent Assignment:** Confirm availability and specialization
 3. **Sprint 0 Kickoff:** Initialize repos, environments, channels
 4. **UX Agent Briefing:** Provide Phase 1 timeline for parallel brand research
+
+
+---
+
+## Appendix E: Real Operational Data — Tadawi Medical Group
+
+> **Source:** Tadawi Medical Group – CallCenter.xlsx (10 sheets, ~1,000+ rows)  
+> **Extracted:** April 23, 2026  
+> **Coverage:** 7 branches, 284+ doctors, 30+ specialties, 152 FAQ items
+
+### E.1 Branch Directory (Actual)
+
+| Branch (AR) | Branch (EN) | City | Region | Key Services | Phone Prefix |
+|-------------|-------------|------|--------|-------------|--------------|
+| مجمع تداوي الطبي - فرع أبها | Tadawi Medical Complex - Abha | أبها | عسير | طوارئ 24H، أشعة، مختبر، عيادات تخصصية، جلدية وتجميل، ليزر، أسنان، عيون، أنف/أذن/حنجرة، نساء/ولادة، أطفال، غدد/سكري، باطنية، جراحة، عظام | 2430-2485 |
+| مستشفى تداوي الطبي TMH | Tadawi Medical Hospital | أبها | عسير | طوارئ 24H، أشعة، مختبر، عيادات تخصصية، جراحة، عناية مركزة، قسطرة، تجميل | 5050-5102 |
+| مجمع تداوي الطبي - فرع المصيف | Tadawi Medical Complex - Al-Mosaf | أبها | عسير | طوارئ، أشعة، مختبر، عيادات تخصصية، جلدية، ليزر، أسنان، تجميل | 3190-3399 |
+| مجمع تداوي الطبي - فرع الموسى (الخميس) | Tadawi Medical Complex - Al-Mousa | خميس مشيط | عسير | طوارئ 24H، أشعة، مختبر، عيادات تخصصية، جلدية، ليزر، أسنان، عيون، تجميل | 1100-1598 |
+| مجمع تداوي الطبي - فرع جازان | Tadawi Medical Complex - Jazan | جازان | جازان | طوارئ، أشعة، مختبر، عيادات تخصصية، جلدية، ليزر، أسنان، تجميل، جراحة عامة | 4190-4890 |
+| الري لايف - العلاج الطبيعي والتأهيل | Ray Life - Physiotherapy & Rehabilitation | أبها | عسير | علاج طبيعي، تأهيل، تخسيس، تكسير دهون، تدليك طبي، باقات علاجية | 573889811 |
+| الري لايف - مستشفى الرعاية LTC | Ray Life - Long Term Care Hospital | أبها | عسير | رعاية طويلة المدى، علاج طبيعي، تأهيل، تمريض متخصص | 573889811 |
+
+### E.2 Doctor Classification System
+
+| Classification | Description | Typical Fee Range (SAR) |
+|----------------|-------------|------------------------|
+| طبيب عام | General Practitioner | 50 – 100 |
+| أخصائي | Specialist | 100 – 250 |
+| أستشاري | Consultant | 200 – 850 |
+| بروفيسور | Professor | 250 – 850 |
+| نائب | Resident / Fellow | 50 – 150 |
+
+### E.3 Insurance Acceptance Rules
+
+| Rule Type | Description | Example |
+|-----------|-------------|---------|
+| يقبل تأمين | Accepts insurance openly | Most GPs and some specialists |
+| لا يقبل تأمين | Cash only | Many consultants, cosmetic procedures |
+| الاطلاع على الملاحظة | Conditional acceptance; see notes | "Max 2 insurance cases per clinic", "Sunday 12 AM only", "Cash at Abha, insurance at Hospital" |
+
+**Key Insurance Nuances (from operational data):**
+- Some doctors accept insurance only at specific branches (e.g., cash at Abha, insurance at TMH hospital)
+- Some clinics limit insurance to 1-2 cases per session
+- Some specialists require lab work to be done in-house to waive consultation fee
+- Circumcision (ختان) insurance only accepted for ages 2 days – 3 months
+- Happy Kids Care (هابي كيدز) insurance booking via coordinator WhatsApp only
+
+### E.4 Clinic Mechanisms
+
+| Mechanism | Description | Use Case |
+|-----------|-------------|----------|
+| الأولوية بقص الفاتورة | First-come-first-served; priority by invoice cut | Emergency, GP walk-ins, most clinics |
+| بالمواعيد | By appointment only | Consultants, specialized procedures, surgery consultations |
+| توزيع الأرقام | Numbers distributed day before by customer service | High-demand consultants (e.g., Dr. Fahd Al-Qahtani) |
+| قائمة الانتظار | Waiting list; coordinator schedules | Cosmetic dentistry, implant consultations |
+
+### E.5 Consultation Fees by Classification
+
+- **طبيب عام:** 50 SAR
+- **أخصائي:** 100 – 250 SAR
+- **أستشاري:** 200 – 850 SAR
+- **بروفيسور:** 250 – 850 SAR
+
+**Highest fee:** 850 SAR (استشاري غدد وسكري وسمنة وباطنية)
+**Emergency fee:** 50 SAR (طبيب عام طوارئ)
+
+### E.6 FAQ Sample (Top 15 from 152 items)
+
+1. **ما انواع السونار ؟ واسعارهم ؟** — سونا عادي ومهبلي وثلاثي الابعاد الاسعار تتحدد من الاستقبال
+2. **هل الاطباء يمكن يعملون خصومات للمراجعين ؟** — عن طريق الطبيب الصلاحيه ولكن لا يتم ذكرها للمراجع
+3. **كم ضريبة الاجنبي ؟** — 15%
+4. **هل يوجد اقساط بجميع الفروع ؟** — اي نعم  تابي وتمارا وتسهيل - ماعدى المستشفى تابي وتسهيل فقط
+5. **ما انواع اجهزه الموجوده لتكسير الدهون ما اسعارها ؟** — جهاز الانكيرف  وكمان عمليات التجميل الجراحيه
+6. **سعر المنطقة ليزر جنتل برو والكلاريتي ؟** — جنتل برو 150 الكلاريتي 200
+7. **كم سعر الأشعة التفصليه ؟** — يبدا من400 وتحدد من قبل الدكتور
+8. **هل يوجد الكي البارد في فرع الخميس؟** — لا يوجد كي بارد يوجد ليزر فقط لفطريات السمكه في القدم
+9. **انواع زراعة الأسنان ؟** — نوع الزراعة سترومن سويسرية
+10. **هل رسوم الخياطة تشمل فك الخياطة بعدين ؟** — لا رسوم الخياطة تختلف عن رسوم فك الخياطة
+11. **هل توجد تطعيمات للاطفال ؟** — لايوجد تطعيمات في جميع الفروع
+12. **سعر تركيب شريحة منع الحمل ؟** — 1200.0
+13. **سعر فك شريحة الحمل ؟** — 500.0
+14. **الأشعة (سونارالعادي)** — 250 ريال تقريبا
+15. **الأشعة (التفصيلي) 4D** — 350 ريال
+
+### E.7 Service Catalog Highlights
+
+**Radiology & Laboratory:**
+- Ultrasound (سونار): Regular / Vaginal / 3D — prices determined at reception
+- Detailed 4D ultrasound: ~350 SAR
+- Regular ultrasound: ~250 SAR
+- Detailed X-ray (أشعة تفصيلية): From 400 SAR
+
+**Laser & Cosmetic:**
+- Gentle Pro laser: 150 SAR per area
+- Clarity laser: 200 SAR per area
+- Fat reduction: EnCurve device + surgical options
+- Body area prices: 500 – 2,700 SAR depending on area
+
+**Dental:**
+- Implant type: Straumann Swiss
+- IUD insertion: 1,200 SAR
+- IUD removal: 500 SAR
+- Stitching and stitch removal are separate fees
+
+**Physiotherapy & Rehabilitation:**
+- Packages available for weight loss, rehabilitation, physiotherapy
+- Booking duration varies by therapist
+
+### E.8 Installment Options
+
+| Provider | Available At | Notes |
+|----------|-------------|-------|
+| Tabby (تابي) | All branches except TMH | — |
+| Tamara (تمارا) | All branches except TMH | — |
+| Tasaheel (تسهيل) | All branches | — |
+
+### E.9 Coordinator Model
+
+Each specialty group or doctor has an assigned coordinator (منسقة) who:
+- Manages appointment scheduling and waiting lists
+- Distributes queue numbers before clinic days
+- Handles WhatsApp booking for specific services
+- Serves as the liaison between patient and doctor
+
+**Example Coordinators:**
+- ساره عسيري — غدد وسكري (Abha)
+- منيره الشهري — عيادات تخصصية (Abha)
+- منار الراقدي — نساء وتجميل (Al-Mosaf)
+- مرام خميس — جراحة وباطنية (Jazan)
+
+---
+
+## Document Control (Updated)
+
+| Version | Date | Author | Changes |
+|---------|------|--------|---------|
+| 0.1 | 2026-04-23 | SA Agent | Initial draft |
+| 0.2 | 2026-04-23 | PO Agent | Added personas and metrics |
+| 1.0 | 2026-04-23 | All Agents | Approved for prototype |
+| **1.1** | **2026-04-23** | **Data Integration** | **Added real operational data from Excel: 7 branches, 284 doctors, 30 specialties, 152 FAQ, insurance rules, fee structure, coordinator model** |
+
