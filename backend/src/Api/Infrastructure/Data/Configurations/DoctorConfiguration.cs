@@ -14,7 +14,7 @@ public class DoctorConfiguration : IEntityTypeConfiguration<Doctor>
         builder.Property(d => d.Email).HasMaxLength(200);
         builder.Property(d => d.Phone).HasMaxLength(50);
         builder.Property(d => d.Mobile).HasMaxLength(50);
-        builder.Property(d => d.Languages).HasColumnType("text[]");
+        // SQLite stores arrays as JSON automatically
         builder.Property(d => d.Qualifications).HasMaxLength(500);
         builder.HasIndex(d => d.LastName);
         builder.HasIndex(d => d.IsActive);

@@ -62,13 +62,11 @@ builder.Services.AddSwaggerGen(c =>
 
 // Health checks
 builder.Services.AddHealthChecks()
-    .AddNpgSql(builder.Configuration.GetConnectionString("DefaultConnection")!, name: "postgresql", tags: new[] { "db" })
     .AddRedis(builder.Configuration.GetConnectionString("Redis")!, name: "redis", tags: new[] { "cache" });
 
-// Database
+// Database (SQLite for local dev - zero-config, file-based)
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"),
-        b => b.MigrationsAssembly("Api")));
+    options.UseSqlite("Data Source=tadawi.db"));
 
 // Redis
 builder.Services.AddSingleton<IConnectionMultiplexer>(sp =>

@@ -14,7 +14,7 @@ public class BranchConfiguration : IEntityTypeConfiguration<Branch>
         builder.Property(b => b.City).IsRequired().HasMaxLength(100);
         builder.Property(b => b.Phone).HasMaxLength(50);
         builder.Property(b => b.Email).HasMaxLength(200);
-        builder.Property(b => b.Services).HasColumnType("text[]");
+        // SQLite stores arrays as JSON automatically
         builder.HasIndex(b => b.City);
         builder.HasIndex(b => b.IsActive);
     }
