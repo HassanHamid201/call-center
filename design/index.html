@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مجموعة تداوي الطبية | Tadawi Medical Group</title>
+  <link rel="stylesheet" href="shared/styles.css">
+  <style>
+    .hero-landing {
+      background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(204 98% 25%) 100%);
+      color: #fff; padding: 4rem 0; text-align: center; position: relative; overflow: hidden;
+    }
+    .hero-landing::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: 1;
+    }
+    .hero-landing .container { position: relative; z-index: 1; }
+    .hero-landing h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; }
+    .hero-landing p { font-size: 1.125rem; opacity: 0.9; max-width: 600px; margin: 0 auto 2rem; }
+    .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .hero-buttons .btn-outline { border-color: rgba(255,255,255,0.4); color: #fff; }
+    .hero-buttons .btn-outline:hover { background: rgba(255,255,255,0.15); border-color: #fff; }
+
+    .stats-bar {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+      margin-top: -2.5rem; position: relative; z-index: 2;
+    }
+    .stat-card {
+      background: hsl(var(--card)); border: 1px solid hsl(var(--border));
+      border-radius: var(--radius-lg); padding: 1.5rem; text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .stat-card-value { font-size: 2rem; font-weight: 800; color: hsl(var(--primary)); }
+    .stat-card-label { font-size: 0.875rem; color: hsl(var(--muted-foreground)); margin-top: 0.25rem; }
+
+    .section-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; text-align: center; }
+    .section-subtitle { font-size: 0.9375rem; color: hsl(var(--muted-foreground)); text-align: center; margin-bottom: 2rem; }
+
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .feature-card {
+      background: hsl(var(--card)); border: 1px solid hsl(var(--border));
+      border-radius: var(--radius-lg); padding: 1.5rem; text-align: center;
+      transition: all 0.2s ease;
+    }
+    .feature-card:hover { border-color: hsl(var(--primary)); transform: translateY(-2px); }
+    .feature-icon {
+      width: 48px; height: 48px; border-radius: var(--radius);
+      background: hsl(var(--accent)); color: hsl(var(--accent-foreground));
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;
+    }
+    .feature-title { font-weight: 600; margin-bottom: 0.5rem; }
+    .feature-desc { font-size: 0.875rem; color: hsl(var(--muted-foreground)); line-height: 1.6; }
+
+    .branch-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .branch-item {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1rem; border: 1px solid hsl(var(--border)); border-radius: var(--radius-lg);
+      background: hsl(var(--card)); transition: all 0.2s;
+    }
+    .branch-item:hover { border-color: hsl(var(--primary)); }
+    .branch-item-icon {
+      width: 40px; height: 40px; border-radius: var(--radius);
+      background: hsl(var(--accent)); color: hsl(var(--accent-foreground));
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .branch-item-name { font-weight: 600; }
+    .branch-item-city { font-size: 0.8125rem; color: hsl(var(--muted-foreground)); }
+
+    .cta-section {
+      background: hsl(var(--muted)); border-radius: var(--radius-xl);
+      padding: 3rem; text-align: center; margin: 2rem 0;
+    }
+
+    @media (max-width: 768px) {
+      .stats-bar { grid-template-columns: repeat(2, 1fr); }
+      .feature-grid { grid-template-columns: 1fr; }
+      .branch-grid { grid-template-columns: 1fr; }
+      .hero-landing h1 { font-size: 1.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo"><img src="doctor-info/logo.png" alt="تداوي" class="logo-img"></a>
+      <nav class="nav">
+        <a href="index.html" class="nav-link active">الرئيسية</a>
+        <a href="doctors.html" class="nav-link">الأطباء</a>
+        <a href="branches.html" class="nav-link">الفروع</a>
+        <a href="patients.html" class="nav-link">المرضى</a>
+      </nav>
+      <div class="header-actions">
+        <a href="login.html" class="btn btn-default btn-sm">تسجيل الدخول</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero-landing">
+    <div class="container">
+      <h1>مجموعة تداوي الطبية</h1>
+      <p>بوابتكم الشاملة للوصول إلى نخبة الأطباء والمختصين في جميع فروع المجموعة. حجز مواعيد، استعلامات، ومعلومات طبية موثوقة.</p>
+      <div class="hero-buttons">
+        <a href="doctors.html" class="btn btn-default btn-lg">استعراض الأطباء</a>
+        <a href="patients.html" class="btn btn-outline btn-lg">البحث عن مريض</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <div class="container">
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="stat-card-value">٥٦</div>
+        <div class="stat-card-label">طبيب متخصص</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-value">٧</div>
+        <div class="stat-card-label">فرع طبي</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-value">٢٥+</div>
+        <div class="stat-card-label">تخصص طبي</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-value">٢٤/٧</div>
+        <div class="stat-card-label">خدمة الطوارئ</div>
+      </div>
+    </div>
+  </div>
+
+  <main class="main">
+    <div class="container">
+
+      <!-- Quick Access -->
+      <section style="margin-bottom:3rem">
+        <h2 class="section-title">الوصول السريع</h2>
+        <p class="section-subtitle">اختر الخدمة التي تبحث عنها</p>
+        <div class="feature-grid">
+          <a href="doctors.html" class="feature-card" style="text-decoration:none;color:inherit">
+            <div class="feature-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <div class="feature-title">الأطباء</div>
+            <div class="feature-desc">استعراض نخبة الأطباء والمختصين في جميع التخصصات</div>
+          </a>
+          <a href="branches.html" class="feature-card" style="text-decoration:none;color:inherit">
+            <div class="feature-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <div class="feature-title">الفروع</div>
+            <div class="feature-desc">تعرف على فروعنا في أبها، خميس مشيط، وجازان</div>
+          </a>
+          <a href="patients.html" class="feature-card" style="text-decoration:none;color:inherit">
+            <div class="feature-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="feature-title">المرضى</div>
+            <div class="feature-desc">البحث عن المرضى وعرض بياناتهم ومواعيدهم</div>
+          </a>
+        </div>
+      </section>
+
+      <!-- Branches -->
+      <section style="margin-bottom:3rem">
+        <h2 class="section-title">فروعنا</h2>
+        <p class="section-subtitle">نخدمكم في أبها وخميس مشيط وجازان</p>
+        <div class="branch-grid">
+          <div class="branch-item">
+            <div class="branch-item-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+            <div><div class="branch-item-name">مجمع تداوي الطبي - فرع أبها</div><div class="branch-item-city">أبها، عسير</div></div>
+          </div>
+          <div class="branch-item">
+            <div class="branch-item-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+            <div><div class="branch-item-name">مجمع تداوي الطبي - فرع المصيف</div><div class="branch-item-city">أبها، عسير</div></div>
+          </div>
+          <div class="branch-item">
+            <div class="branch-item-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+            <div><div class="branch-item-name">مجمع تداوي الطبي - فرع الموسى</div><div class="branch-item-city">خميس مشيط، عسير</div></div>
+          </div>
+          <div class="branch-item">
+            <div class="branch-item-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+            <div><div class="branch-item-name">مجمع تداوي الطبي - فرع جازان</div><div class="branch-item-city">جازان</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <div class="cta-section">
+        <h2 style="font-size:1.5rem;font-weight:700;margin-bottom:0.5rem">هل أنت موظف في المركز؟</h2>
+        <p style="color:hsl(var(--muted-foreground));margin-bottom:1.5rem">سجل الدخول للوصول إلى لوحة التحكم والإدارة</p>
+        <a href="login.html" class="btn btn-default btn-lg">تسجيل الدخول</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>مجموعة تداوي الطبية © 2025 — Tadawi Medical Group. جميع الحقوق محفوظة</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if(e.isIntersecting){ e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; obs.unobserve(e.target);} });
+      }, {threshold:0.1});
+      document.querySelectorAll('.stat-card, .feature-card, .branch-item').forEach(el => {
+        el.style.opacity='0'; el.style.transform='translateY(12px)'; el.style.transition='opacity 0.5s ease, transform 0.5s ease'; obs.observe(el);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تسجيل الدخول | تداوي الطبية</title>
+  <link rel="stylesheet" href="shared/styles.css">
+  <style>
+    .login-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem; background: hsl(var(--muted)); }
+    .login-card {
+      width: 100%; max-width: 400px; background: hsl(var(--card));
+      border: 1px solid hsl(var(--border)); border-radius: var(--radius-xl);
+      padding: 2.5rem; box-shadow: var(--shadow-lg);
+    }
+    .login-logo { text-align: center; margin-bottom: 1.5rem; }
+    .login-logo img { height: 56px; }
+    .login-title { font-size: 1.25rem; font-weight: 700; text-align: center; margin-bottom: 0.25rem; }
+    .login-subtitle { font-size: 0.875rem; color: hsl(var(--muted-foreground)); text-align: center; margin-bottom: 1.5rem; }
+    .login-footer { text-align: center; margin-top: 1.5rem; font-size: 0.8125rem; color: hsl(var(--muted-foreground)); }
+    .login-footer a { color: hsl(var(--primary)); font-weight: 500; }
+    .login-footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="login-page">
+    <div class="login-card">
+      <div class="login-logo">
+        <a href="index.html"><img src="doctor-info/logo.png" alt="تداوي"></a>
+      </div>
+      <h1 class="login-title">تسجيل الدخول</h1>
+      <p class="login-subtitle">أدخل بياناتك للوصول إلى النظام</p>
+      <form onsubmit="event.preventDefault(); window.location.href='admin.html';">
+        <div class="form-group">
+          <label class="form-label">البريد الإلكتروني</label>
+          <input type="email" class="form-input" placeholder="name@tadawi.med" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">كلمة المرور</label>
+          <input type="password" class="form-input" placeholder="••••••••" required>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem">
+          <label class="radio-label" style="font-size:0.8125rem"><input type="checkbox"><span>تذكرني</span></label>
+          <a href="#" style="font-size:0.8125rem;color:hsl(var(--primary));font-weight:500">نسيت كلمة المرور؟</a>
+        </div>
+        <button type="submit" class="btn btn-default" style="width:100%">تسجيل الدخول</button>
+      </form>
+      <div class="login-footer">
+        <p>ليس لديك حساب؟ <a href="#">تواصل مع الإدارة</a></p>
+        <p style="margin-top:0.5rem"><a href="index.html">← العودة إلى الرئيسية</a></p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

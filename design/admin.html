@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة التحكم | تداوي الطبية</title>
+  <link rel="stylesheet" href="shared/styles.css">
+  <style>
+    .admin-layout { display: grid; grid-template-columns: 240px 1fr; gap: 1.5rem; }
+    .sidebar {
+      background: hsl(var(--card)); border: 1px solid hsl(var(--border));
+      border-radius: var(--radius-lg); padding: 1rem; height: fit-content;
+    }
+    .sidebar-nav { display: flex; flex-direction: column; gap: 0.25rem; }
+    .sidebar-link {
+      display: flex; align-items: center; gap: 0.625rem;
+      padding: 0.625rem 0.875rem; border-radius: var(--radius);
+      font-size: 0.875rem; font-weight: 500; color: hsl(var(--muted-foreground));
+      transition: all 0.15s; text-decoration: none;
+    }
+    .sidebar-link:hover { background: hsl(var(--muted)); color: hsl(var(--foreground)); }
+    .sidebar-link.active { background: hsl(var(--accent)); color: hsl(var(--accent-foreground)); }
+    .sidebar-section { font-size: 0.6875rem; font-weight: 700; color: hsl(var(--muted-foreground)); text-transform: uppercase; letter-spacing: 0.05em; padding: 0.75rem 0.875rem 0.375rem; }
+    .sidebar-divider { height: 1px; background: hsl(var(--border)); margin: 0.5rem 0; }
+
+    .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+    .stat-tile {
+      background: hsl(var(--card)); border: 1px solid hsl(var(--border));
+      border-radius: var(--radius-lg); padding: 1.25rem;
+    }
+    .stat-tile-label { font-size: 0.75rem; color: hsl(var(--muted-foreground)); font-weight: 500; }
+    .stat-tile-value { font-size: 1.75rem; font-weight: 800; color: hsl(var(--foreground)); margin-top: 0.25rem; }
+    .stat-tile-delta { font-size: 0.75rem; margin-top: 0.25rem; }
+    .stat-tile-delta.up { color: hsl(var(--success)); }
+
+    .manage-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .manage-card {
+      background: hsl(var(--card)); border: 1px solid hsl(var(--border));
+      border-radius: var(--radius-lg); padding: 1.25rem;
+      transition: all 0.2s ease; cursor: pointer;
+    }
+    .manage-card:hover { border-color: hsl(var(--primary)); }
+    .manage-card-icon {
+      width: 40px; height: 40px; border-radius: var(--radius);
+      background: hsl(var(--accent)); color: hsl(var(--accent-foreground));
+      display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem;
+    }
+    .manage-card-title { font-weight: 600; margin-bottom: 0.25rem; }
+    .manage-card-desc { font-size: 0.8125rem; color: hsl(var(--muted-foreground)); }
+
+    .recent-table { width: 100%; border-collapse: collapse; }
+    .recent-table th {
+      text-align: right; padding: 0.625rem 1rem;
+      font-size: 0.75rem; font-weight: 600; color: hsl(var(--muted-foreground));
+      border-bottom: 1px solid hsl(var(--border)); text-transform: uppercase;
+    }
+    .recent-table td {
+      padding: 0.75rem 1rem; font-size: 0.875rem;
+      border-bottom: 1px solid hsl(var(--border));
+    }
+    .recent-table tr:last-child td { border-bottom: none; }
+
+    @media (max-width: 1024px) {
+      .admin-layout { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .manage-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .stats-row { grid-template-columns: 1fr; }
+      .manage-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo"><img src="doctor-info/logo.png" alt="تداوي" class="logo-img"></a>
+      <nav class="nav">
+        <a href="admin.html" class="nav-link active">الإدارة</a>
+      </nav>
+      <div class="header-actions">
+        <span style="font-size:0.8125rem;color:hsl(var(--muted-foreground));margin-left:0.5rem">مرحباً، Admin</span>
+        <a href="index.html" class="btn btn-outline btn-sm">خروج</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="container">
+      <div class="page-header">
+        <h1 class="page-title">لوحة التحكم</h1>
+        <span class="badge badge-secondary">Admin</span>
+      </div>
+
+      <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+          <div class="sidebar-nav">
+            <a href="admin.html" class="sidebar-link active">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              لوحة التحكم
+            </a>
+            <a href="#" class="sidebar-link">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              المستخدمين
+            </a>
+            <a href="#" class="sidebar-link">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+              الفروع
+            </a>
+            <a href="doctors.html" class="sidebar-link">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              الأطباء
+            </a>
+            <div class="sidebar-divider"></div>
+            <div class="sidebar-section">الإدارة</div>
+            <a href="#" class="sidebar-link">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              المرضى
+            </a>
+            <a href="#" class="sidebar-link">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              المراجع
+            </a>
+            <a href="#" class="sidebar-link">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              المراجعة
+            </a>
+          </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div>
+          <!-- Stats -->
+          <div class="stats-row">
+            <div class="stat-tile">
+              <div class="stat-tile-label">إجمالي المستخدمين</div>
+              <div class="stat-tile-value">١٢٨</div>
+              <div class="stat-tile-delta up">+٥ هذا الشهر</div>
+            </div>
+            <div class="stat-tile">
+              <div class="stat-tile-label">الأطباء</div>
+              <div class="stat-tile-value">٥٦</div>
+              <div class="stat-tile-delta up">+٢ هذا الشهر</div>
+            </div>
+            <div class="stat-tile">
+              <div class="stat-tile-label">الفروع</div>
+              <div class="stat-tile-value">٧</div>
+            </div>
+            <div class="stat-tile">
+              <div class="stat-tile-label">المرضى</div>
+              <div class="stat-tile-value">٤,٢٥٠</div>
+              <div class="stat-tile-delta up">+١٢٥ هذا الشهر</div>
+            </div>
+          </div>
+
+          <!-- Management Cards -->
+          <div class="card" style="margin-bottom:1rem">
+            <div class="card-header">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:hsl(var(--primary))"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              <div class="card-title">الإدارة</div>
+            </div>
+            <div class="card-content">
+              <div class="manage-grid">
+                <div class="manage-card">
+                  <div class="manage-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+                  <div class="manage-card-title">المستخدمين</div>
+                  <div class="manage-card-desc">إدارة حسابات المستخدمين والأدوار</div>
+                </div>
+                <div class="manage-card">
+                  <div class="manage-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+                  <div class="manage-card-title">الفروع</div>
+                  <div class="manage-card-desc">إدارة فروع المجموعة الطبية</div>
+                </div>
+                <div class="manage-card">
+                  <div class="manage-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+                  <div class="manage-card-title">الأطباء</div>
+                  <div class="manage-card-desc">إدارة بيانات الأطباء والتخصصات</div>
+                </div>
+                <div class="manage-card">
+                  <div class="manage-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+                  <div class="manage-card-title">التخصصات</div>
+                  <div class="manage-card-desc">إدارة التخصصات الطبية</div>
+                </div>
+                <div class="manage-card">
+                  <div class="manage-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+                  <div class="manage-card-title">المرضى</div>
+                  <div class="manage-card-desc">إدارة سجلات المرضى وبياناتهم</div>
+                </div>
+                <div class="manage-card">
+                  <div class="manage-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+                  <div class="manage-card-title">المراجع</div>
+                  <div class="manage-card-desc">إدارة بيانات المراجع والقوائم</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Activity -->
+          <div class="card">
+            <div class="card-header">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:hsl(var(--primary))"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              <div class="card-title">النشاط الأخير</div>
+            </div>
+            <div class="card-content" style="padding:0">
+              <table class="recent-table">
+                <thead>
+                  <tr><th>الوقت</th><th>المستخدم</th><th>الإجراء</th><th>الكيان</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>٢٠٢٥/٠٤/٢٣ ١٠:٣٠</td><td>Admin</td><td>إنشاء</td><td>مريض جديد: أحمد العلي</td></tr>
+                  <tr><td>٢٠٢٥/٠٤/٢٣ ٠٩:١٥</td><td>Manager</td><td>تحديث</td><td>بيانات طبيب: د. فاطمة الحربي</td></tr>
+                  <tr><td>٢٠٢٥/٠٤/٢٢ ١٦:٤٥</td><td>Admin</td><td>حذف</td><td>فرع قديم</td></tr>
+                  <tr><td>٢٠٢٥/٠٤/٢٢ ١٤:٢٠</td><td>Receptionist</td><td>إنشاء</td><td>موعد: د. سعد القحطاني</td></tr>
+                  <tr><td>٢٠٢٥/٠٤/٢١ ١١:٠٠</td><td>Admin</td><td>تحديث</td><td>مرجع: الجنسيات</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>مجموعة تداوي الطبية © 2025 — Tadawi Medical Group. جميع الحقوق محفوظة</p>
+    </div>
+  </footer>
+</body>
+</html>

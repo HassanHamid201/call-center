@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الفروع | تداوي الطبية</title>
+  <link rel="stylesheet" href="shared/styles.css">
+  <style>
+    .page-header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .page-title { font-size: 1.5rem; font-weight: 700; }
+    .branches-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .branch-card {
+      background: hsl(var(--card)); border: 1px solid hsl(var(--border));
+      border-radius: var(--radius-lg); overflow: hidden;
+      transition: all 0.2s ease;
+    }
+    .branch-card:hover { border-color: hsl(var(--primary)); box-shadow: var(--shadow-md); }
+    .branch-card-image {
+      height: 160px; background: hsl(var(--accent)); color: hsl(var(--accent-foreground));
+      display: flex; align-items: center; justify-content: center; font-size: 3rem;
+    }
+    .branch-card-body { padding: 1.25rem; }
+    .branch-card-title { font-size: 1.0625rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .branch-card-city { font-size: 0.8125rem; color: hsl(var(--muted-foreground)); margin-bottom: 0.75rem; }
+    .branch-card-services { display: flex; flex-wrap: wrap; gap: 0.375rem; margin-bottom: 1rem; }
+    .service-tag {
+      font-size: 0.6875rem; padding: 0.25rem 0.5rem;
+      background: hsl(var(--secondary)); color: hsl(var(--secondary-foreground));
+      border-radius: var(--radius-sm); font-weight: 500;
+    }
+    .branch-card-footer {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 0.75rem; border-top: 1px solid hsl(var(--border));
+    }
+    .branch-card-phone { font-size: 0.8125rem; color: hsl(var(--muted-foreground)); display: flex; align-items: center; gap: 0.375rem; }
+    @media (max-width: 768px) { .branches-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo"><img src="doctor-info/logo.png" alt="تداوي" class="logo-img"></a>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">الرئيسية</a>
+        <a href="doctors.html" class="nav-link">الأطباء</a>
+        <a href="branches.html" class="nav-link active">الفروع</a>
+        <a href="patients.html" class="nav-link">المرضى</a>
+      </nav>
+      <div class="header-actions">
+        <a href="login.html" class="btn btn-outline btn-sm">تسجيل الدخول</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="breadcrumb-bar">
+    <div class="container">
+      <nav class="breadcrumb">
+        <a href="index.html" class="breadcrumb-link">الرئيسية</a>
+        <span class="breadcrumb-sep">/</span>
+        <span class="breadcrumb-current">الفروع</span>
+      </nav>
+    </div>
+  </div>
+
+  <main class="main">
+    <div class="container">
+      <div class="page-header">
+        <h1 class="page-title">فروع المجموعة</h1>
+        <span class="badge badge-secondary">٧ فروع</span>
+      </div>
+
+      <div class="branches-grid">
+        <div class="branch-card">
+          <div class="branch-card-image">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <div class="branch-card-body">
+            <div class="branch-card-title">مجمع تداوي الطبي - فرع أبها</div>
+            <div class="branch-card-city">أبها، منطقة عسير</div>
+            <div class="branch-card-services">
+              <span class="service-tag">طوارئ ٢٤ ساعة</span>
+              <span class="service-tag">أشعة</span>
+              <span class="service-tag">مختبر</span>
+              <span class="service-tag">عيادات تخصصية</span>
+            </div>
+            <div class="branch-card-footer">
+              <div class="branch-card-phone"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> +966 17 243 0000</div>
+              <a href="doctors.html" class="btn btn-outline btn-sm">الأطباء</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="branch-card">
+          <div class="branch-card-image">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <div class="branch-card-body">
+            <div class="branch-card-title">مجمع تداوي الطبي - فرع المصيف</div>
+            <div class="branch-card-city">أبها، منطقة عسير</div>
+            <div class="branch-card-services">
+              <span class="service-tag">طوارئ</span>
+              <span class="service-tag">أسنان</span>
+              <span class="service-tag">جلدية</span>
+              <span class="service-tag">تجميل</span>
+            </div>
+            <div class="branch-card-footer">
+              <div class="branch-card-phone"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> +966 17 339 9000</div>
+              <a href="doctors.html" class="btn btn-outline btn-sm">الأطباء</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="branch-card">
+          <div class="branch-card-image">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <div class="branch-card-body">
+            <div class="branch-card-title">مستشفى تداوي الطبي</div>
+            <div class="branch-card-city">أبها، منطقة عسير</div>
+            <div class="branch-card-services">
+              <span class="service-tag">طوارئ ٢٤H</span>
+              <span class="service-tag">جراحة</span>
+              <span class="service-tag">عناية مركزة</span>
+              <span class="service-tag">قسطرة</span>
+            </div>
+            <div class="branch-card-footer">
+              <div class="branch-card-phone"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> +966 17 505 0000</div>
+              <a href="doctors.html" class="btn btn-outline btn-sm">الأطباء</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="branch-card">
+          <div class="branch-card-image">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <div class="branch-card-body">
+            <div class="branch-card-title">مجمع تداوي الطبي - فرع الموسى</div>
+            <div class="branch-card-city">خميس مشيط، منطقة عسير</div>
+            <div class="branch-card-services">
+              <span class="service-tag">طوارئ</span>
+              <span class="service-tag">أسنان</span>
+              <span class="service-tag">نساء</span>
+              <span class="service-tag">أطفال</span>
+            </div>
+            <div class="branch-card-footer">
+              <div class="branch-card-phone"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> +966 17 159 6000</div>
+              <a href="doctors.html" class="btn btn-outline btn-sm">الأطباء</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>مجموعة تداوي الطبية © 2025 — Tadawi Medical Group. جميع الحقوق محفوظة</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if(e.isIntersecting){ e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; obs.unobserve(e.target);} });
+      }, {threshold:0.1});
+      document.querySelectorAll('.branch-card').forEach(el => {
+        el.style.opacity='0'; el.style.transform='translateY(12px)'; el.style.transition='opacity 0.4s ease, transform 0.4s ease'; obs.observe(el);
+      });
+    });
+  </script>
+</body>
+</html>
