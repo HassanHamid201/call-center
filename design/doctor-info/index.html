@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>معلومات الطبيب | تداوي الطبية</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="#" class="logo">
+        <span class="logo-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </span>
+        <div class="logo-text">
+          <span class="logo-title">تداوي</span>
+          <span class="logo-subtitle">مجموعة تداوي الطبية</span>
+        </div>
+      </a>
+      <nav class="nav">
+        <a href="#" class="nav-link active">الأطباء</a>
+        <a href="#" class="nav-link">الفروع</a>
+        <a href="#" class="nav-link">المرضى</a>
+        <a href="#" class="nav-link">البحث</a>
+      </nav>
+      <div class="header-actions">
+        <button class="btn-icon" title="طباعة" onclick="window.print()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        </button>
+        <button class="btn-icon" title="مشاركة">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb-bar">
+    <div class="container">
+      <nav class="breadcrumb">
+        <a href="#" class="breadcrumb-link">الرئيسية</a>
+        <span class="breadcrumb-sep">/</span>
+        <a href="#" class="breadcrumb-link">الأطباء</a>
+        <span class="breadcrumb-sep">/</span>
+        <span class="breadcrumb-current">د. أحمد محمد العلي</span>
+      </nav>
+    </div>
+  </div>
+
+  <main class="main">
+    <div class="container">
+
+      <!-- Hero Card -->
+      <section class="hero-card">
+        <div class="hero-avatar">
+          <div class="avatar-placeholder">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div class="availability-badge available">
+            <span class="dot"></span>
+            متواجد
+          </div>
+        </div>
+        <div class="hero-info">
+          <div class="hero-header">
+            <div>
+              <h1 class="doctor-name">د. أحمد محمد العلي</h1>
+              <p class="doctor-title">استشاري جراحة العظام والمفاصل</p>
+            </div>
+            <div class="badges">
+              <span class="badge badge-primary">أستشاري</span>
+              <span class="badge badge-outline">يقبل تأمين</span>
+            </div>
+          </div>
+          <div class="hero-meta">
+            <div class="meta-item">
+              <span class="meta-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
+              </span>
+              <span class="meta-label">القطاع:</span>
+              <span class="meta-value">العيادات الطبية</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              </span>
+              <span class="meta-label">الفرع:</span>
+              <span class="meta-value">مجمع تداوي الطبي - فرع أبها</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </span>
+              <span class="meta-label">ساعات العمل:</span>
+              <span class="meta-value">٩:٠٠ ص - ١٢:٠٠ م | ٤:٠٠ م - ٩:٠٠ م</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-actions">
+          <div class="action-card">
+            <span class="action-label">التحويلة الداخلية</span>
+            <span class="action-value ext">١٢٣</span>
+          </div>
+          <div class="action-card">
+            <span class="action-label">رسوم الاستشارة</span>
+            <span class="action-value fee">٣٥٠ ر.س</span>
+          </div>
+          <button class="btn btn-primary btn-lg">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            حجز موعد
+          </button>
+        </div>
+      </section>
+
+      <!-- Content Grid -->
+      <div class="content-grid">
+
+        <!-- Left Column -->
+        <div class="col-main">
+
+          <!-- Contact Card -->
+          <section class="card">
+            <div class="card-header">
+              <span class="card-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </span>
+              <h2 class="card-title">معلومات التواصل</h2>
+            </div>
+            <div class="card-body">
+              <div class="info-grid">
+                <div class="info-item">
+                  <span class="info-label">الجوال</span>
+                  <a href="tel:+966501234567" class="info-value link">+966 50 123 4567</a>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">الهاتف</span>
+                  <a href="tel:+966172430000" class="info-value link">+966 17 243 0000</a>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">البريد الإلكتروني</span>
+                  <a href="mailto:ahmed.ali@tadawi.med" class="info-value link">ahmed.ali@tadawi.med</a>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">المنسقة</span>
+                  <span class="info-value">سارة عبدالله</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Biography Card -->
+          <section class="card">
+            <div class="card-header">
+              <span class="card-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              </span>
+              <h2 class="card-title">النبذة التعريفية</h2>
+            </div>
+            <div class="card-body">
+              <p class="bio-text">
+                استشاري جراحة العظام والمفاصل بخبرة تتجاوز ١٥ عاماً في مجال جراحة العظام والكسور والتعويضات المفصلية. حاصل على البورد السعودي في جراحة العظام والمفاصل، وعضو في الجمعية السعودية لجراحة العظام. متخصص في جراحة الركبة والورك بالمنظار، وإصلاح إصابات الملاعب، وزراعة الغضاريف.
+              </p>
+              <div class="qualifications">
+                <h3 class="subheading">المؤهلات العلمية</h3>
+                <ul class="qual-list">
+                  <li class="qual-item">
+                    <span class="qual-dot"></span>
+                    <span>زمالة جراحة العظام والمفاصل — جامعة الملك سعود</span>
+                  </li>
+                  <li class="qual-item">
+                    <span class="qual-dot"></span>
+                    <span>البورد السعودي في جراحة العظام</span>
+                  </li>
+                  <li class="qual-item">
+                    <span class="qual-dot"></span>
+                    <span>دبلومة تخصصية في جراحة المنظار — مستشفى ماساتشوستس العام</span>
+                  </li>
+                  <li class="qual-item">
+                    <span class="qual-dot"></span>
+                    <span>عضو الجمعية السعودية لجراحة العظام والمفاصل</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- Services Card -->
+          <section class="card">
+            <div class="card-header">
+              <span class="card-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </span>
+              <h2 class="card-title">الخدمات الطبية</h2>
+            </div>
+            <div class="card-body">
+              <div class="tags">
+                <span class="tag">جراحة الركبة بالمنظار</span>
+                <span class="tag">جراحة الورك بالمنظار</span>
+                <span class="tag">إصلاح الكسور المعقدة</span>
+                <span class="tag">زراعة الغضاريف</span>
+                <span class="tag">علاج إصابات الملاعب</span>
+                <span class="tag">تبديل المفاصل</span>
+                <span class="tag">حقن البلازما الغنية بالصفائح</span>
+                <span class="tag">علاج آلام الظهر المزمنة</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- Schedule Card -->
+          <section class="card">
+            <div class="card-header">
+              <span class="card-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              </span>
+              <h2 class="card-title">المواعيد وأيام العمل</h2>
+            </div>
+            <div class="card-body">
+              <div class="schedule-table">
+                <div class="schedule-row schedule-header">
+                  <span>اليوم</span>
+                  <span>الفترة الصباحية</span>
+                  <span>الفترة المسائية</span>
+                  <span>الحالة</span>
+                </div>
+                <div class="schedule-row">
+                  <span class="day">السبت</span>
+                  <span>٩:٠٠ ص – ١٢:٠٠ م</span>
+                  <span>٤:٠٠ م – ٩:٠٠ م</span>
+                  <span class="status available">متاح</span>
+                </div>
+                <div class="schedule-row">
+                  <span class="day">الأحد</span>
+                  <span>٩:٠٠ ص – ١٢:٠٠ م</span>
+                  <span>٤:٠٠ م – ٩:٠٠ م</span>
+                  <span class="status available">متاح</span>
+                </div>
+                <div class="schedule-row">
+                  <span class="day">الإثنين</span>
+                  <span>٩:٠٠ ص – ١٢:٠٠ م</span>
+                  <span>٤:٠٠ م – ٩:٠٠ م</span>
+                  <span class="status available">متاح</span>
+                </div>
+                <div class="schedule-row">
+                  <span class="day">الثلاثاء</span>
+                  <span>—</span>
+                  <span>—</span>
+                  <span class="status vacation">إجازة</span>
+                </div>
+                <div class="schedule-row">
+                  <span class="day">الأربعاء</span>
+                  <span>٩:٠٠ ص – ١٢:٠٠ م</span>
+                  <span>٤:٠٠ م – ٩:٠٠ م</span>
+                  <span class="status available">متاح</span>
+                </div>
+                <div class="schedule-row">
+                  <span class="day">الخميس</span>
+                  <span>٩:٠٠ ص – ١٢:٠٠ م</span>
+                  <span>—</span>
+                  <span class="status limited">مكتفية</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+        </div>
+
+        <!-- Right Column -->
+        <div class="col-side">
+
+          <!-- Quick Info Card -->
+          <section class="card card-compact">
+            <div class="card-body">
+              <div class="stat-list">
+                <div class="stat-item">
+                  <span class="stat-icon" style="color: var(--color-primary);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                  </span>
+                  <div class="stat-info">
+                    <span class="stat-label">الجنسية</span>
+                    <span class="stat-value">سعودي</span>
+                  </div>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-icon" style="color: var(--color-info);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                  </span>
+                  <div class="stat-info">
+                    <span class="stat-label">اللغات</span>
+                    <span class="stat-value">العربية، الإنجليزية</span>
+                  </div>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-icon" style="color: var(--color-success);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  </span>
+                  <div class="stat-info">
+                    <span class="stat-label">التأمين</span>
+                    <span class="stat-value">يقبل تأمين</span>
+                  </div>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-icon" style="color: var(--color-warning);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  </span>
+                  <div class="stat-info">
+                    <span class="stat-label">آلية العيادة</span>
+                    <span class="stat-value">حجز مسبق</span>
+                  </div>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-icon" style="color: var(--color-purple);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                  </span>
+                  <div class="stat-info">
+                    <span class="stat-label">الفئة العمرية</span>
+                    <span class="stat-value">بالغين + أطفال</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Branch Card -->
+          <section class="card card-compact">
+            <div class="card-header">
+              <span class="card-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              </span>
+              <h2 class="card-title" style="font-size: 0.9375rem;">معلومات الفرع</h2>
+            </div>
+            <div class="card-body">
+              <div class="branch-card">
+                <div class="branch-name">مجمع تداوي الطبي - فرع أبها</div>
+                <div class="branch-address">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  أبها، منطقة عسير
+                </div>
+                <div class="branch-phone">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                  +966 17 243 0000
+                </div>
+                <button class="btn btn-outline btn-sm" style="margin-top: 0.75rem; width: 100%;">
+                  عرض على الخريطة
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Insurance Card -->
+          <section class="card card-compact">
+            <div class="card-header">
+              <span class="card-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              </span>
+              <h2 class="card-title" style="font-size: 0.9375rem;">التأمين والدفع</h2>
+            </div>
+            <div class="card-body">
+              <div class="insurance-info">
+                <div class="insurance-row">
+                  <span class="insurance-label">قبول التأمين</span>
+                  <span class="insurance-value accept">يقبل</span>
+                </div>
+                <div class="insurance-row">
+                  <span class="insurance-label">الشركات المشمولة</span>
+                  <span class="insurance-value">بوبا، تكافل الراجحي، الدرع العربي</span>
+                </div>
+                <div class="insurance-row">
+                  <span class="insurance-label">الدفع الإلكتروني</span>
+                  <span class="insurance-value accept">متاح</span>
+                </div>
+                <div class="note-box">
+                  <span class="note-icon">ℹ</span>
+                  <span class="note-text">يرجى إحضار بطاقة التأمين والهوية الوطنية عند الزيارة</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Vacation Alert -->
+          <section class="alert-card">
+            <div class="alert-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <div class="alert-content">
+              <div class="alert-title">تنبيه إجازة</div>
+              <div class="alert-text">الطبيب في إجازة من ١٥ ذو الحجة حتى ٢٥ ذو الحجة</div>
+            </div>
+          </section>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>مجموعة تداوي الطبية © 2025 — جميع الحقوق محفوظة</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
